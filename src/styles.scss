@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/scss/bootstrap";
+@import "./app/scss/theme.scss";
+
+body {
+  background-color: $background;
+  color: $tertiary;
+  font-family: $font-family, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  white-space: wrap;
+  width: 100%;
+}
+
+a,
+ul,
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+//scrollbar
+body::-webkit-scrollbar {
+  width: 6px;
+}
+body::-webkit-scrollbar-track {
+  background: $background;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: $tertiary;
+  border-radius: 20px;
+}
