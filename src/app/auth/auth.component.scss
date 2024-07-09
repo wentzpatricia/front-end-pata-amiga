@@ -3,165 +3,168 @@
 @import "./../scss/mixins.scss";
 
 .container-login {
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  width: 100%;
+  @include medium-web {
     display: flex;
-    height: 100vh;
-    justify-content: space-between;
-    width: 100%;
-    @include medium-web {
+    flex-direction: column-reverse;
+  }
+  &__login {
+    padding: 25px;
+    width: 30%;
+    .btn-back {
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      color: $primary;
+      cursor: pointer;
       display: flex;
-      flex-direction: column-reverse;
+      font-weight: $font-weight-semibold;
+      justify-content: center;
     }
-    &__login {
-        padding: 25px;
-        width: 30%;
-        .btn-back {
-          align-items: center;
+    .container-form {
+      align-items: center;
+      display: flex;
+      height: 90%;
+      justify-content: center;
+    }
+    .form {
+      width: 60%;
+      @include medium-web {
+        width: 80%;
+      }
+      .invalid-login {
+        p {
+          font-size: $font-size-psmall;
+          color: $error-color;
+          margin-top: -10px;
+        }
+      }
+      &__title {
+        align-items: center;
+        color: $primary;
+        display: flex;
+        font-size: $font-size-xlarge;
+        font-weight: $font-weight-bolder;
+        justify-content: center;
+        margin-bottom: 50px;
+        text-align: center;
+
+        &_img {
+          height: 64px;
+          margin-right: 25px;
+          width: 64px;
+        }
+      }
+      .form-group {
+        margin-bottom: 25px;
+        label {
+          color: $primary;
+          font-weight: $font-weight-bold;
+          margin-bottom: 10px;
+        }
+      }
+      .btn-create-account {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        span {
+          color: $tertiary;
+          font-size: $font-size-small;
+        }
+        button {
           background-color: transparent;
           border: none;
           color: $primary;
-          display: flex;
+          font-size: $font-size-small;
           font-weight: $font-weight-semibold;
-          justify-content: center;
         }
-        .container-form {
-            align-items: center;
-            display: flex;
-            height: 70%;
-            justify-content: center;    
+      }
+      .btn-forgot-password {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -15px;
+        margin-bottom: 15px;
+        button {
+          background-color: transparent;
+          border: none;
+          color: $primary;
+          font-weight: $font-weight-semibold;
+          font-size: $font-size-psmall;
         }
-        .form {
-            width: 60%;
-            @include medium-web {
-                width: 80%;
-            }
-            .invalid-login {
-                p {
-                    font-size: $font-size-psmall;
-                    color: $error-color;
-                    margin-top: -10px;
-                }
-            }
-            &__title {
-                align-items: center;
-                color: $primary;
-                display: flex;
-                font-size: $font-size-xlarge;
-                font-weight: $font-weight-bolder;
-                justify-content: center;
-                margin-bottom: 50px;
-                text-align: center;
-
-                &_img {
-                    height: 64px;
-                    margin-right: 25px;
-                    width: 64px;
-                }
-
-            }
-            .form-group {
-                margin-bottom: 25px;
-                label {
-                    color: $primary;
-                    font-weight: $font-weight-bold;
-                    margin-bottom: 10px;
-                }
-            }
-            .btn-create-account {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                span {
-                    color: $tertiary;
-                    font-size: $font-size-small;
-                }
-                button {
-                    background-color: transparent;
-                    border: none;
-                    color: $primary;
-                    font-size: $font-size-small;
-                    font-weight: $font-weight-semibold;  
-                }
-            }
-            .btn-forgot-password {
-                display: flex;
-                justify-content: flex-end;
-                margin-top: -15px;
-                margin-bottom: 15px;
-                button {
-                    background-color: transparent;
-                    border: none;
-                    color: $primary;
-                    font-weight: $font-weight-semibold;
-                    font-size: $font-size-psmall;
-                }
-            }
-            .btn-submit {
-                background-color: $primary;
-                border: none;
-                border-radius: $border-radius;
-                color: $white;
-                font-weight: $font-weight-bolder;
-                height: $height-buttons;
-                margin: 35px 0;
-                transition: 0.5s;
-                width: 100%;
-                &:hover {
-                background-color: $primary-dark-10;
-                transition: 0.5s;
-                }
-            }
+      }
+      .btn-submit {
+        background-color: $primary;
+        border: none;
+        border-radius: $border-radius;
+        color: $white;
+        font-weight: $font-weight-bolder;
+        height: $height-buttons;
+        margin: 35px 0;
+        transition: 0.5s;
+        width: 100%;
+        &:hover {
+          background-color: $primary-dark-10;
+          transition: 0.5s;
         }
-        @include medium-web {
-          width: 100%;
-          height: 100%;
-        }
+      }
     }
-    &__logo {
-        width: 70%;
-        @include medium-web { display: none; }
-
-        img {
-            height: 100%;
-            object-fit: cover;
-            width: 100%;
-        }
+    @include medium-web {
+      width: 100%;
+      height: 100%;
     }
+  }
+  &__logo {
+    width: 70%;
+    @include medium-web {
+      display: none;
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
 }
-  
+
 /*layout eye button inside input*/
 .far {
-    i {
+  i {
     color: $primary-light-30;
     margin-top: -4px;
-    }
+  }
 }
 .hide {
-    display: none;
+  display: none;
 }
-input#password-field, input#new-password-field {
-    border-radius: 7px;
+input#password-field,
+input#password-field-confirm {
+  border-radius: 7px;
 }
 .inner-addon {
-    position: relative;
+  position: relative;
 }
 .inner-addon .far,
 .inner-addon .fas {
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    z-index: 100;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  z-index: 100;
 }
 .left-addon .far,
 .left-addon .fas {
-    left: 0px;
+  left: 0px;
 }
 .right-addon .far,
 .right-addon .fas {
-    right: 0px;
+  right: 0px;
 }
 .left-addon input {
-    padding-left: 30px;
+  padding-left: 30px;
 }
 .right-addon input {
-    padding-right: 30px;
+  padding-right: 30px;
 }

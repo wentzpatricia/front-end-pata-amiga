@@ -33,19 +33,30 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
-.form-control {
+.form-control,
+.form-select {
   background-color: $background;
   border-color: $primary;
   &::placeholder {
-      color: $primary-light-30;
+    color: $primary-light-30;
   }
   &::placeholder {
-      color: $tertiary;
+    color: $tertiary;
   }
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   background-color: $background;
   border-color: $primary !important;
   box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
+}
+
+.form-select option {
+  background-color: $background;
+  color: $tertiary;
+}
+
+.form-control.is-invalid {
+  background-image: none;
 }
