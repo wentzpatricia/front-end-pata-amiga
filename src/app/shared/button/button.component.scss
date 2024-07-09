@@ -1,125 +1,148 @@
-@import "src/app/scss/variables.scss";
-@import "src/app/scss/theme.scss";
+// @import "../../scss/theme.scss";
+// @import "../../scss/variables.scss";
+// @function rem($pixels, $context: 16) {
+//   @return #{$pixels / $context}rem;
+// }
 
-@function rem($pixels, $context: 16) {
-  @return #{$pixels / $context}rem;
-}
+// $colorMap: (
+//   danger: (
+//     base: $error-color,
+//     text: $white,
+//   ),
 
-$colorMap: (
-  danger: ( base: $error-color, text: $white ),
+//   disabled: (
+//     base: var(--gray-500),
+//     text: $white,
+//   ),
 
-  disabled: ( base: var(--gray-500), text: $white ),
+//   primary: (
+//     base: $primary,
+//     text: $white,
+//   ),
 
-  primary: ( base: $primary, text: $white ),
+//   secondary: (
+//     base: $secondary,
+//     text: $white,
+//   ),
 
-  secondary: ( base: $secondary, text: $white ),
+//   success: (
+//     base: $sucess-color,
+//     text: $white,
+//   ),
+// );
 
-  success: ( base: $sucess-color, text: $white ),
-);
+// @mixin color-modifiers() {
+//   @each $color-group, $ruleset in $colorMap {
+//     &--#{$color-group} {
+//       background-color: #{map-get($ruleset, base)};
+//       color: #{map-get($ruleset, text)};
 
-@mixin color-modifiers() {
-  @each $color-group, $ruleset in $colorMap {
+//       &:hover {
+//         background-color: #{map-get($ruleset, base)};
+//         border-color: none !important;
+//         transition: 0.5s;
+//       }
 
-    &--#{$color-group} {
+//       &:focus {
+//         box-shadow: 0 0 0 0.25rem rgba(#{map-get($ruleset, base)}, 0.3);
+//       }
+//     }
+//   }
+// }
 
-      background-color: #{map-get($ruleset, base)};
-      color: #{map-get($ruleset, text)};
+// @mixin outline-styles() {
+//   @each $color-group, $ruleset in $colorMap {
+//     &--outline-#{$color-group} {
+//       background-color: transparent;
+//       border: 1px solid #{map-get($ruleset, base)};
+//       color: #{map-get($ruleset, base)};
+//       transition: 0.5s;
 
-      &:hover {
-        background-color: #{map-get($ruleset, base)};
-        border-color: none !important;
-        transition: 0.5s;
-      }
+//       &:disabled {
+//         opacity: 0.5;
 
-      &:focus { box-shadow: 0 0 0 0.25rem rgba(#{map-get($ruleset, base)}, 0.3);}
+//         &:hover {
+//           background-color: transparent !important;
+//           border: 1px solid #{map-get($ruleset, base)};
+//           color: #{map-get($ruleset, base)};
+//         }
+//       }
 
-    }
-  }
-}
+//       &:focus-visible {
+//         box-shadow: 0
+//           0
+//           0
+//           0.25rem
+//           rgba(#{map-get($ruleset, base)}, 0.3) !important;
+//       }
 
-@mixin outline-styles() {
-  @each $color-group, $ruleset in $colorMap {
-    &--outline-#{$color-group} {
-      background-color: transparent;
-      border: 1px solid #{map-get($ruleset, base)};
-      color: #{map-get($ruleset, base)};
-      transition: 0.5s;
+//       &:hover {
+//         background-color: #{map-get($ruleset, base)};
+//         color: $white;
+//         transition: 0.5s;
+//       }
+//     }
+//   }
+// }
 
-      &:disabled { 
-        opacity: 0.5;
+// .custom-button {
+//   align-items: center;
+//   border: none;
+//   border-radius: $border-radius-flag;
+//   cursor: pointer;
+//   display: flex;
+//   font-size: 14px;
+//   font-weight: $font-weight-bold;
+//   height: $height-buttons;
+//   justify-content: center;
+//   letter-spacing: 1px;
+//   margin: 20px 0;
+//   opacity: 0.9;
+//   overflow: hidden;
+//   padding: 0 20px;
+//   position: relative;
+//   text-align: center;
+//   text-decoration: none;
+//   transition: all 0.5s;
 
-        &:hover { background-color: transparent !important;  border: 1px solid #{map-get($ruleset, base)}; color: #{map-get($ruleset, base)}; } 
-        
-      }
+//   span {
+//     align-items: center;
+//     display: flex;
 
-      &:focus-visible { box-shadow: 0 0 0 0.25rem rgba(#{map-get($ruleset, base)}, 0.3) !important;}
+//     mat-icon {
+//       margin-right: 8px;
+//     }
+//   }
 
-      &:hover {
-        background-color: #{map-get($ruleset, base)};
-        color: $white;
-        transition: 0.5s;
-      }
+//   .custom-spinner {
+//     animation: spin 1s linear infinite;
+//     border: 2px solid currentColor;
+//     border-radius: 50%;
+//     border-top-color: transparent;
+//     height: 15px;
+//     margin-right: 15px;
+//     pointer-events: none;
+//     width: 15px;
+//   }
 
-    }
-  }
-}
+//   &__wrapper {
+//     align-items: center;
+//     display: flex;
+//   }
 
-.custom-button {
-  align-items: center;
-  border: none;
-  border-radius: $border-radius-flag;
-  cursor: pointer;
-  display: flex;
-  font-size: 14px;
-  font-weight: $font-weight-bold;
-  height: $height-buttons;
-  justify-content: center;
-  letter-spacing: 1px;
-  margin: 20px 0;
-  opacity: 0.9;
-  overflow: hidden;
-  padding: 0 20px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.5s;
+//   &:disabled {
+//     opacity: 0.5;
+//   }
 
-  span {
-    align-items: center;
-    display: flex;
+//   @include color-modifiers;
+//   @include outline-styles;
+// }
 
-    mat-icon { margin-right: 8px; }
-  }
-
-  .custom-spinner {
-    animation: spin 1s linear infinite;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    border-top-color: transparent;
-    height: 15px;
-    margin-right: 15px;
-    pointer-events: none;
-    width: 15px;
-  }
-
-  &__wrapper {
-    align-items: center;
-    display: flex;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-
-  @include color-modifiers;
-  @include outline-styles;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes spin {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }

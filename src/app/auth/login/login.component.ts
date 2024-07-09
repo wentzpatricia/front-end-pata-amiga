@@ -5,7 +5,11 @@ import { Router } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
 import { LocalStorageUtils } from '../../core/_utils/localstorage';
 
-@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrl: './login.component.scss' })
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+})
 export class LoginComponent implements OnInit {
   public errorMessage!: string;
   public formLogIn!: FormGroup;
@@ -17,7 +21,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthGuard,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -34,17 +38,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  doLogin(){
+  doLogin() {
     const email = this.formLogIn.get('email')?.value;
     const password = this.formLogIn.get('password')?.value;
     const localStorageUtils = new LocalStorageUtils();
-    if (email === 'login@email.com.br' && password === '1234') {
-      localStorageUtils.setItem('login', true)
-      
+    if (email === 'email@email.com.br' && password === '1234') {
+      localStorageUtils.setItem('login', true);
     } else {
-      this.errorMessage = 'Email ou senha inválidos. Por favor, tente novamente.';
+      this.errorMessage =
+        'Email ou senha inválidos. Por favor, tente novamente.';
     }
-    if(this.authService.canActivate()){
+    if (this.authService.canActivate()) {
       this.router.navigate(['/dashboard']);
     }
   }
@@ -53,7 +57,7 @@ export class LoginComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-  showHidePassword(){
+  showHidePassword() {
     this.hide = !this.hide;
   }
 }

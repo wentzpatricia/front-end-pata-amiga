@@ -1,0 +1,34 @@
+@if (!mdq.matches){
+<header #header class="header">
+  <figure class="header__img">
+    <img [src]="logo" alt="Logo do sistema" />
+  </figure>
+  <nav class="header__nav">
+    <ul>
+      <li>
+        <a
+          [routerLink]="'/dashboard'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Meus voluntariados</a
+        >
+      </li>
+      <li>
+        <a
+          [routerLink]="'/users'"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Eventos</a
+        >
+      </li>
+      <li>
+        <button (click)="signOut()">
+          <i class="pi pi-sign-out"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+} @if (mdq.matches) {
+<app-navbar-mobile></app-navbar-mobile>
+}

@@ -1,5 +1,11 @@
-<div [ngClass]="{
+<ng-container>
+  <app-header *ngIf="isUserAuthenticated()"></app-header>
+</ng-container>
+<div
+  [ngClass]="{
     'main-auth': isUserAuthenticated(),
-    'main-not-auth': !isUserAuthenticated()}">
-    <router-outlet></router-outlet>
+    'main-not-auth': !isUserAuthenticated()
+  }"
+>
+  <router-outlet></router-outlet>
 </div>
