@@ -1,1 +1,5 @@
-<h2>asdihasiudh</h2>
+<div [ngClass]="{
+    'main-auth': isUserAuthenticated(),
+    'main-not-auth': !isUserAuthenticated()}">
+    <router-outlet></router-outlet>
+</div>
