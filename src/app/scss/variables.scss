@@ -1,0 +1,42 @@
+$white: #fcfcfc;
+$black: #0d0e12;
+
+$sucess-color: #3bc97c;
+$error-color: #f1416c;
+$wait-color: #3e97ff;
+$alert-color: #f6c000;
+$info-color: #7239ea;
+$alert-background-color: #fffedb;
+$sucess-background-color: #dfffea;
+$error-background-color: #ffeef3;
+$wait-background-color: #e9f3ff;
+$info-background-color: #e8ddff;
+
+$border-radius: 5px;
+$border-radius-flag: 5px;
+$height-buttons: 35px;
+
+//font-size
+$font-size-xxsmall: 10px;
+$font-size-xsmall: 12px;
+$font-size-psmall: 14px;
+$font-size-small: 16px;
+$font-size-medium: 18px;
+$font-size-large: 20px;
+$font-size-xlarge: 24px;
+$font-size-xxlarge: 30px;
+
+// Box weights
+$font-weight-lighter: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 500;
+$font-weight-bold: 600;
+$font-weight-bolder: 700;
+
+// Box shadows
+$box-shadow-xs: 0 3px 4px 0 rgba($black, 0.03) !default;
+$box-shadow-sm: 0 0.1rem 1rem 0.25rem rgba($black, 0.05) !default;
+$box-shadow: 0 0.5rem 1.5rem 0.5rem rgba($black, 0.075) !default;
+$box-shadow-lg: 0 1rem 2rem 1rem rgba($black, 0.1) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;

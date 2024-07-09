@@ -10,10 +10,9 @@ export class LoginComponent implements OnInit {
   public errorMessage!: string;
   public formLogIn!: FormGroup;
   public hide: boolean = true;
-  public logoImage = '';
-  public logo = '';
-  public systemName = 'Panvel';
-  
+  public image = './../../../assets/images/background-login.png';
+  public logo = './../../../assets/icons/logo-brown.svg';
+
   constructor(
     private authService: AuthGuard,
     private formBuilder: FormBuilder,

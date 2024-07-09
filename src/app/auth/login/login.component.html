@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="container-login">
+    <div class="container-login__logo">
+        <img src="{{ image }}" alt="Imagem de um cãozinho filhote preto" />
+    </div>
+    <div class="container-login__login">
+        <div class="container-form">
+            <div class="form">
+                <h3 class="form__title"><img class="form__title_img" src="{{ logo }}" alt="Logo do sistema">Pata amiga</h3>
+                <form [formGroup]="formLogIn">
+                    <div class="form-group">
+                    <label>E-mail</label>
+                    <input class="form-control login text-lowercase" formControlName="email" placeholder="email@email"
+                        [ngClass]="{ 'is-invalid': formLogIn.touched && formLogIn.get('email')?.invalid }" />
+                        <div class="invalid-feedback">E-mail inválido</div>
+                    </div>
+
+                    <div class="form-group inner-addon right-addon">
+                        <label>Senha</label>
+                        <div class="input-group">
+                            <input id="password-field" [type]="hide ? 'password' : 'text'" class="form-control pwd-control" name="password" formControlName="password"
+                            [ngClass]="{ 'is-invalid': formLogIn.touched && formLogIn.get('password')?.invalid }" placeholder="Digite sua senha"
+                            (keyup.enter)="formLogIn.valid ? doLogin() : ''" />
+                            <div>
+                                <div type="button" class="far" (click)="showHidePassword()">
+                                    <i [ngClass]="{ 'text-danger': formLogIn.touched && formLogIn.get('password')?.invalid }" [class]="hide ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">Senha ou e-mail inválido</div>
+                        </div>
+                    </div>
+                    <div class="invalid-login">
+                        @if (errorMessage) {
+                            <p>{{ errorMessage }}</p>
+                        }
+                    </div>
+                    <button class="btn-submit btn" (click)="doLogin()" [disabled]="!formLogIn.valid"> Entrar </button>
+                </form>
+                <div class="btn-create-account">
+                    <span>Não tem conta? </span><button  [routerLink]="['/auth/register']">Crie agora!</button>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div>
+  

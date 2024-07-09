@@ -1,5 +1,6 @@
 @import "bootstrap/scss/bootstrap";
 @import "./app/scss/theme.scss";
+@import "primeicons/primeicons.css";
 
 body {
   background-color: $background;
@@ -30,4 +31,21 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: $tertiary;
   border-radius: 20px;
+}
+
+.form-control {
+  background-color: $background;
+  border-color: $primary;
+  &::placeholder {
+      color: $primary-light-30;
+  }
+  &::placeholder {
+      color: $tertiary;
+  }
+}
+
+.form-control:focus {
+  background-color: $background;
+  border-color: $primary !important;
+  box-shadow: 0 0 0 0.2rem rgba($primary, 0.25) !important;
 }
