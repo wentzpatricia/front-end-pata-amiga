@@ -16,6 +16,9 @@
   z-index: 2;
   &__img {
     margin: 0 0 0 20px;
+    img {
+      width: 50px;
+    }
   }
 
   &__nav {
@@ -35,6 +38,15 @@
           color: lighten($primary, 40%);
           transition: 0.5s;
         }
+      }
+    }
+
+    &_btn-sign-out {
+      background-color: transparent;
+      border: none;
+      margin: 0 10px;
+      i {
+        color: $primary;
       }
     }
   }

@@ -3,6 +3,13 @@
 
 .container-btn {
   margin-top: 25px;
+  button {
+    background-color: transparent;
+    border: none;
+    i {
+      color: $background;
+    }
+  }
 }
 
 .detail-container-menu-mobile {
@@ -16,12 +23,8 @@
   &__btn {
     border: none;
     background-color: transparent;
-  }
-  .logo {
-    border: none;
-    margin-left: 20px;
-    img {
-      width: 60px;
+    i {
+      color: $tertiary;
     }
   }
 }
@@ -43,16 +46,17 @@
 
 .sidenav {
   transition: all 0.5s ease;
-  background: $gray-900;
+  background: $tertiary;
   position: fixed;
   z-index: 999;
   top: 0;
   width: 0;
   height: 100vh;
 
-  img {
-    width: 170px;
-    margin-bottom: 20px;
+  .logo {
+    border: none;
+    margin-bottom: 60px;
+    width: 60px;
   }
 
   .logout {
@@ -66,10 +70,10 @@
       display: flex;
       align-items: center;
       span {
-        color: $gray-300;
+        color: darken($background, 20%);
         margin-left: 10px;
         &:hover {
-          color: $other-white;
+          color: $white;
         }
       }
     }
@@ -79,7 +83,7 @@
     display: flex;
     width: 100%;
     padding: 25px 16px;
-    border-bottom: 1px dashed $transparent-white;
+    border-bottom: 1px dashed $background;
   }
   .logo {
     border: none;
@@ -91,7 +95,7 @@
   .logo-text {
     margin-left: 10px;
     h1 {
-      color: $other-white;
+      color: $white;
       font-size: $font-size-xlarge;
       width: 140px;
       margin: 0;
@@ -146,7 +150,7 @@
       border-radius: 7px;
       transition: all 0.3s ease;
       justify-content: flex-start;
-      color: $gray-400;
+      color: darken($background, 20%);
       font-weight: $font-weight-bold;
       .sidenav-link-icon {
         width: 20px;
@@ -163,7 +167,7 @@
 
   .sidenav-nav-item:hover {
     .sidenav-nav-link {
-      color: $other-white;
+      color: $white;
     }
   }
 }
@@ -173,16 +177,13 @@
 
   .sidenav-link-icon,
   .sidenav-link-text {
-    color: $other-white;
+    color: $white;
     white-space: nowrap;
   }
 }
 
 .active-sublevel {
-  // background-color: $transparent-white;
-  // height: 30px;
-  // padding: 0 20px;
-  color: $other-white !important;
+  color: $white !important;
 }
 
 .menu-collapse-icon {
@@ -190,7 +191,7 @@
   text-align: center;
   width: 20px;
   height: 20px;
-  color: $other-white;
+  color: $white;
 }
 
 .sublevel-nav {
@@ -201,7 +202,7 @@
       display: flex;
       align-items: center;
       height: 2.5rem;
-      color: $gray-400;
+      color: darken($background, 20%);
       text-decoration: none;
       border-radius: 7px;
       transition: all 0.3s ease;
@@ -222,7 +223,7 @@
     }
 
     .sublevel-nav-link:hover {
-      color: $other-white;
+      color: $white;
     }
   }
 }

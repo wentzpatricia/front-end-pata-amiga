@@ -22,8 +22,8 @@ interface SideNavToggle {
 }
 
 const navData: ISidebarData[] = [
-  { routeLink: 'dashboard', labelTag: 'Dashboard' },
-  { routeLink: 'users', labelTag: 'Usuários' },
+  { routeLink: 'dashboard', labelTag: 'Meus voluntariados' },
+  { routeLink: '', labelTag: 'Eventos' },
 ];
 
 @Component({

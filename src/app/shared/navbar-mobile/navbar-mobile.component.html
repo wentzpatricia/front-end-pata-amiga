@@ -16,32 +16,10 @@
   >
     <ul class="sidenav-nav" [ngClass]="!collapsed ? 'sidenav-nav-mobile' : ''">
       @if (collapsed){
-      <img [src]="logo" alt="Logo da panvel" />
+      <img class="logo" [src]="logo" alt="Logo do sistema" />
       } @for (data of navsideData; track data) {
 
       <li class="sidenav-nav-item">
-        @if (data.items && data.items.length > 0) {
-        <a
-          class="sidenav-nav-link"
-          [ngClass]="getActiveClass(data)"
-          (click)="handleClick(data)"
-        >
-          <div class="container-icon-title">
-            @if (collapsed) {
-            <span class="sidenav-link-text" @fadeInOut>
-              {{ data.labelTag }}
-            </span>
-            }
-          </div>
-          @if (data.items && collapsed) {
-          <i
-            class="menu-collapse-icon"
-            [class.pi-angle-down]="data.expanded"
-            [class.pi-angle-right]="!data.expanded"
-          ></i>
-          }
-        </a>
-        } @if (!data.items || (data.items && data.items.length === 0)) {
         <a
           class="sidenav-nav-link"
           [routerLink]="[data.routeLink]"
@@ -55,11 +33,10 @@
           </span>
           }
         </a>
-        }
       </li>
       } @if (collapsed){
       <div class="container-btn">
-        <button (click)="signOut()" icon="pi pi-sign-out"></button>
+        <button (click)="signOut()"><i class="pi pi-sign-out"></i></button>
       </div>
 
       }
