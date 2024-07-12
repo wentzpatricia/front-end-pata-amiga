@@ -1,29 +1,30 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostListener,
-  ViewChild,
-} from '@angular/core';
-import { LocalStorageUtils } from '../../core/_utils/localstorage';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 
-export interface ISidebarData {
-  routeLink: string;
-}
+import { ISidebarData } from '../navbar-mobile/helper';
+import { LocalStorageUtils } from '../../core/_utils/localstorage';
+import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
-@Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
-})
+@Component({ selector: 'app-header', templateUrl: './header.component.html', styleUrl: './header.component.scss' })
 export class HeaderComponent {
+  @Input() userType!: UserTypeEnum;
   @ViewChild('header', { read: ElementRef }) header!: ElementRef;
-  public logo: string = './../../../assets/icons/logo-brown.svg';
 
-  mdq!: MediaQueryList;
+  mdq!: MediaQueryList; 
   mediaQueryListener!: () => void;
+
+  volunteerNavData: ISidebarData[] = [
+    { routeLink: '/volunteering/my-volunteering', labelTag: 'Meus voluntariados' },
+    { routeLink: '/volunteering/events', labelTag: 'Eventos' },
+  ];
+
+  ongNavData: ISidebarData[] = [
+    { routeLink: '/ong/events', labelTag: 'Eventos' },
+  ];
+
+  data: ISidebarData[] = [];
+  logo: string = './../../../assets/icons/logo-brown.svg';
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -35,7 +36,9 @@ export class HeaderComponent {
     this.mdq.addListener(this.mediaQueryListener);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userType === UserTypeEnum.ONG ? this.data = this.ongNavData : this.data = this.volunteerNavData;
+  }
 
   getActiveClass(data: ISidebarData): string {
     return data.routeLink && this.router.url.includes(data.routeLink)

@@ -2,10 +2,22 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-
-  {path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)},
-  { path: 'dashboard', canActivate: [AuthGuard], loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule)},
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard' } 
-  
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'ong',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/ong/ong.module').then((m) => m.OngModule),
+  },
+  {
+    path: 'volunteering',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/volunteer/volunteer.module').then(
+        (m) => m.VolunteerModule
+      ),
+  },
 ];

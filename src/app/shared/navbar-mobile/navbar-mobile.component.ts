@@ -1,19 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import {
-  animate,
-  keyframes,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { ISidebarData, fadeInOut } from './helper';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Router } from '@angular/router';
+
+import { ISidebarData, fadeInOut } from './helper';
 import { LocalStorageUtils } from '../../core/_utils/localstorage';
 
 interface SideNavToggle {
@@ -21,15 +10,7 @@ interface SideNavToggle {
   collapsed: boolean;
 }
 
-const navData: ISidebarData[] = [
-  { routeLink: 'dashboard', labelTag: 'Meus voluntariados' },
-  { routeLink: '', labelTag: 'Eventos' },
-];
-
-@Component({
-  selector: 'app-navbar-mobile',
-  templateUrl: './navbar-mobile.component.html',
-  styleUrl: './navbar-mobile.component.scss',
+@Component({ selector: 'app-navbar-mobile', templateUrl: './navbar-mobile.component.html', styleUrl: './navbar-mobile.component.scss',
   animations: [
     fadeInOut,
     trigger('rotate', [
@@ -45,23 +26,24 @@ const navData: ISidebarData[] = [
     ]),
   ],
 })
-export class NavbarMobileComponent {
-  public collapsed = false;
-  public screenWidth = 0;
-  public navsideData = navData;
-  public multiple: boolean = false;
-  public profileImage!: string;
-  public title!: String;
-  public sub!: string;
-  public loadingImage!: boolean;
-  public systemPicture: string | undefined;
-  public logo: string = './../../../assets/icons/logo-brown.svg';
 
-  constructor(public router: Router) {}
+export class NavbarMobileComponent {
+  @Input() navsideData!: ISidebarData[];
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   @Output() darkThemeOn: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @ViewChild('sidenavs', { read: ElementRef })
-  elementNav: ElementRef | undefined;
+  @ViewChild('sidenavs', { read: ElementRef }) elementNav: ElementRef | undefined;
+
+  collapsed = false;
+  loadingImage!: boolean;
+  logo: string = './../../../assets/icons/logo-brown.svg';
+  multiple: boolean = false;
+  profileImage!: string;
+  screenWidth = 0;
+  sub!: string;
+  systemPicture: string | undefined;
+  title!: String;
+
+  constructor(public router: Router) {}
 
   async ngOnInit(): Promise<void> {
     this.screenWidth = window.innerWidth;
@@ -75,6 +57,12 @@ export class NavbarMobileComponent {
 
   private removeBodyOverlay(): void {
     document.body.classList.remove('body-overlay');
+  }
+
+  getActiveClass(data: ISidebarData): string {
+    return data.routeLink && this.router.url.includes(data.routeLink)
+      ? 'active'
+      : '';
   }
 
   handleClickOutside(event: MouseEvent): void {
@@ -96,29 +84,7 @@ export class NavbarMobileComponent {
     }
   }
 
-  public toggleCollapse(): void {
-    if (this.collapsed) this.removeBodyOverlay();
-    else this.addBodyOverlay();
-
-    this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({
-      collapsed: this.collapsed,
-      screenWidth: this.screenWidth,
-    });
-  }
-
-  public handleClick(item: ISidebarData): void {
-    this.shrinkItems(item);
-    item.expanded = !item.expanded;
-  }
-
-  public getActiveClass(data: ISidebarData): string {
-    return data.routeLink && this.router.url.includes(data.routeLink)
-      ? 'active'
-      : '';
-  }
-
-  public shrinkItems(item: ISidebarData): void {
+  shrinkItems(item: ISidebarData): void {
     if (this.multiple) return;
 
     for (let modelItem of this.navsideData) {
@@ -132,5 +98,16 @@ export class NavbarMobileComponent {
     const localStorageUtils = new LocalStorageUtils();
     localStorageUtils.setItem('login', false);
     this.router.navigate(['/auth/login']);
+  }
+
+  toggleCollapse(): void {
+    if (this.collapsed) this.removeBodyOverlay();
+    else this.addBodyOverlay();
+
+    this.collapsed = !this.collapsed;
+    this.onToggleSideNav.emit({
+      collapsed: this.collapsed,
+      screenWidth: this.screenWidth,
+    });
   }
 }

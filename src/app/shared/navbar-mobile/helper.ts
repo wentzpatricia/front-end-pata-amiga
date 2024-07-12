@@ -2,11 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 
 export interface ISidebarData {
   routeLink: string;
-  permission?: string;
-  icon?: string;
   labelTag: string;
   expanded?: boolean;
-  items?: ISidebarData[];
 }
 
 export const fadeInOut = trigger('fadeInOut', [

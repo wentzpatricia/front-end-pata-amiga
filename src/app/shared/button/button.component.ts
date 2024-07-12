@@ -3,7 +3,7 @@ import { Component,HostBinding, Input, ViewEncapsulation } from '@angular/core';
 interface IButtonProps { color: string; outline: boolean; isLoading: boolean; border: string;}
 
 @Component({ selector: 'button[customButton], a[customButton]', templateUrl: './button.component.html', styleUrls: ['./button.component.scss'],
-encapsulation: ViewEncapsulation.None, })
+encapsulation: ViewEncapsulation.None })
 export class ButtonComponent implements IButtonProps {
 
   constructor() { }

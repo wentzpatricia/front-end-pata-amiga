@@ -11,11 +11,11 @@ import { LocalStorageUtils } from '../../core/_utils/localstorage';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  public errorMessage!: string;
-  public formLogIn!: FormGroup;
-  public hide: boolean = true;
-  public image = './../../../assets/images/background-login.png';
-  public logo = './../../../assets/icons/logo-brown.svg';
+  errorMessage!: string;
+  formLogIn!: FormGroup;
+  hide: boolean = true;
+  image = './../../../assets/images/background-login.png';
+  logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
     private authService: AuthGuard,
@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     this.createForm();
 
     if (this.isUserAuthenticated()) {
-      this.router.navigate(['/dashboard']);
+      //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
+      this.router.navigate(['/volunteering/my-volunteering']);
     }
   }
 
@@ -49,7 +50,8 @@ export class LoginComponent implements OnInit {
         'Email ou senha inválidos. Por favor, tente novamente.';
     }
     if (this.authService.canActivate()) {
-      this.router.navigate(['/dashboard']);
+      //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
+      this.router.navigate(['/volunteering/my-volunteering']);
     }
   }
 

@@ -1,5 +1,5 @@
 <ng-container>
-  <app-header *ngIf="isUserAuthenticated()"></app-header>
+  <app-header [userType]="userType" *ngIf="isUserAuthenticated()"></app-header>
 </ng-container>
 <div
   [ngClass]="{

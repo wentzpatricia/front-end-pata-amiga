@@ -11,12 +11,12 @@ import { Validations } from '../../core/_utils/validations';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  public errorMessage!: string;
-  public form!: FormGroup;
-  public hide: boolean = true;
-  public hideConfirm: boolean = true;
-  public image = './../../../assets/images/background-login.png';
-  public logo = './../../../assets/icons/logo-brown.svg';
+  errorMessage!: string;
+  form!: FormGroup;
+  hide: boolean = true;
+  hideConfirm: boolean = true;
+  image = './../../../assets/images/background-login.png';
+  logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
     private authService: AuthGuard,
