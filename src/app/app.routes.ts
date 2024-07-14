@@ -3,8 +3,7 @@ import { AuthGuard } from './auth/auth.guard';
 
 import { UserTypeEnum } from './core/_utils/UserType.enum';
 
-let userType: UserTypeEnum = UserTypeEnum.ONG;
-
+let userType: UserTypeEnum = UserTypeEnum.VOLUNTEER;
 export const routes: Routes = [
   {
     path: 'auth',
@@ -26,8 +25,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: userType === UserTypeEnum.ONG ? '/ong' : '/volunteering',
+    redirectTo: '/volunteering/my-volunteering',
     pathMatch: 'full',
   },
-  { path: '**', redirectTo: userType === UserTypeEnum.ONG ? '/ong' : '/volunteering' }
+  { path: '**', redirectTo: '/volunteering/my-volunteering' }
 ];

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
-import { AuthGuard } from './auth/auth.guard';
 import { SharedModule } from './shared/shared.module';
 import { UserTypeEnum } from './core/_utils/UserType.enum';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,10 @@ export class AppComponent implements OnInit{
   //depois precisa vir da api
   userType!: UserTypeEnum;
 
-  constructor(private authService: AuthGuard) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.userType = UserTypeEnum.ONG;
+    this.userType = UserTypeEnum.VOLUNTEER;
   }
 
   isUserAuthenticated(): boolean {

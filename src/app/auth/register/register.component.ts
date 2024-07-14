@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthGuard } from '../auth.guard';
 import { Validations } from '../../core/_utils/validations';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { Validations } from '../../core/_utils/validations';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  errorMessage!: string;
+  errorMessage: string | null = null;
   form!: FormGroup;
   hide: boolean = true;
   hideConfirm: boolean = true;
@@ -19,7 +20,8 @@ export class RegisterComponent {
   logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
-    private authService: AuthGuard,
+    private authGuard: AuthGuard,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -46,7 +48,19 @@ export class RegisterComponent {
     );
   }
 
-  createUser() {}
+  createUser() {
+    const rawForm = this.form.getRawValue()
+    this.authService.register(rawForm.email, rawForm.userType, rawForm.confirmPassword).subscribe({
+      next: () => {
+        this.router.navigateByUrl('auth/login');
+        console.log ('SUCESSO')
+      },
+      error: (err) => {
+        this.errorMessage = err.code;
+        console.error ('ERRO', err)
+      }
+    })
+  }
 
   isUserAuthenticated(): boolean {
     return this.authService.isAuthenticated();

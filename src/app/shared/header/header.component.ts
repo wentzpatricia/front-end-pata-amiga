@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 import { ISidebarData } from '../navbar-mobile/helper';
-import { LocalStorageUtils } from '../../core/_utils/localstorage';
 import { UserTypeEnum } from '../../core/_utils/UserType.enum';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({ selector: 'app-header', templateUrl: './header.component.html', styleUrl: './header.component.scss' })
 export class HeaderComponent {
@@ -27,6 +27,7 @@ export class HeaderComponent {
   logo: string = './../../../assets/icons/logo-brown.svg';
 
   constructor(
+    public authService: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private router: Router
@@ -47,9 +48,7 @@ export class HeaderComponent {
   }
 
   signOut() {
-    const localStorageUtils = new LocalStorageUtils();
-    localStorageUtils.setItem('login', false);
-    this.router.navigate(['/auth/login']);
+    this.authService.logout();
   }
 
   @HostListener('window:scroll') onWindowScroll() {
