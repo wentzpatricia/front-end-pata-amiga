@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   constructor(private authService: AuthGuard) {}
 
   ngOnInit(): void {
-    this.userType = UserTypeEnum.VOLUNTEER;
+    this.userType = UserTypeEnum.ONG;
   }
 
   isUserAuthenticated(): boolean {

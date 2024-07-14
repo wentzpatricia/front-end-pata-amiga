@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
     }
     if (this.authService.canActivate()) {
       //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
-      this.router.navigate(['/volunteering/my-volunteering']);
+      // this.router.navigate(['/volunteering/my-volunteering']);
+      this.router.navigate(['/ong/events']);
     }
   }
 
