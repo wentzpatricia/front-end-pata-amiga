@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthGuard } from '../auth.guard';
 import { Validations } from '../../core/_utils/validations';
 import { AuthService } from '../auth.service';
 
@@ -20,7 +19,6 @@ export class RegisterComponent {
   logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
-    private authGuard: AuthGuard,
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
@@ -29,15 +27,16 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.createForm();
 
-    if (this.isUserAuthenticated()) {
-      this.router.navigate(['/dashboard']);
-    }
+    // if (this.isUserAuthenticated()) {
+    //   this.router.navigate(['/dashboard']);
+    // }
   }
 
   createForm() {
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.email, Validators.required]],
+        username: ['teste'],
         userType: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
@@ -49,10 +48,10 @@ export class RegisterComponent {
   }
 
   createUser() {
-    const rawForm = this.form.getRawValue()
-    this.authService.register(rawForm.email, rawForm.userType, rawForm.confirmPassword).subscribe({
+    const rawForm = this.form.getRawValue();
+    this.authService.register(rawForm.email, rawForm.username, rawForm.confirmPassword, rawForm.userType).subscribe({
       next: () => {
-        this.router.navigateByUrl('auth/login');
+        // this.router.navigateByUrl('auth/login');
         console.log ('SUCESSO')
       },
       error: (err) => {

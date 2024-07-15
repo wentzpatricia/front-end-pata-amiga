@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAGQ9IiMX9iNfEIpzBZSUpY8EcBbEc-SfM",
@@ -22,9 +23,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     importProvidersFrom(BrowserModule), 
     importProvidersFrom(BrowserAnimationsModule), 
-    // importProvidersFrom([
-    //   provideFirebaseApp(()=> initializeApp(firebaseConfig)),
-    //   provideAuth(()=> getAuth())
-    // ]),
-    provideHttpClient(), provideFirebaseApp(() => initializeApp(firebaseConfig)), provideAuth(() => getAuth())]
+    provideHttpClient(), provideFirebaseApp(() => initializeApp(firebaseConfig)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())]
 };

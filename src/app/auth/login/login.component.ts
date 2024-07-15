@@ -42,26 +42,10 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    // const email = this.formLogIn.get('email')?.value;
-    // const password = this.formLogIn.get('password')?.value;
-    // const localStorageUtils = new LocalStorageUtils();
-    // if (email === 'email@email.com.br' && password === '1234') {
-    //   localStorageUtils.setItem('login', true);
-    // } else {
-    //   this.errorMessage =
-    //     'Email ou senha inválidos. Por favor, tente novamente.';
-    // }
-    // if (this.authService.canActivate()) {
-    //   //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
-    //   // this.router.navigate(['/volunteering/my-volunteering']);
-    //   this.router.navigate(['/ong/events']);
-    // }
     const rawForm = this.formLogIn.getRawValue()
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
         this.router.navigateByUrl('/volunteering/my-volunteering');
-        const localStorageUtils = new LocalStorageUtils();
-        localStorageUtils.setItem('login', true)
         console.log ('SUCESSO')
       },
       error: (err) => {
