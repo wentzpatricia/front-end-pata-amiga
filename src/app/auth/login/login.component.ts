@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthGuard } from '../auth.guard';
 import { LocalStorageUtils } from '../../core/_utils/localstorage';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
-    private authService: AuthGuard,
+    private authGuard: AuthGuard,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -40,20 +42,17 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    const email = this.formLogIn.get('email')?.value;
-    const password = this.formLogIn.get('password')?.value;
-    const localStorageUtils = new LocalStorageUtils();
-    if (email === 'email@email.com.br' && password === '1234') {
-      localStorageUtils.setItem('login', true);
-    } else {
-      this.errorMessage =
-        'Email ou senha inválidos. Por favor, tente novamente.';
-    }
-    if (this.authService.canActivate()) {
-      //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
-      // this.router.navigate(['/volunteering/my-volunteering']);
-      this.router.navigate(['/ong/events']);
-    }
+    const rawForm = this.formLogIn.getRawValue()
+    this.authService.login(rawForm.email, rawForm.password).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/volunteering/my-volunteering');
+        console.log ('SUCESSO')
+      },
+      error: (err) => {
+        this.errorMessage = err.code;
+        console.error ('ERRO', err)
+      }
+    })
   }
 
   isUserAuthenticated(): boolean {

@@ -26,8 +26,8 @@
               class="form-select"
               placeholder="Escolha onde você irá atuar"
             >
-              <option value="1" selected>Voluntário</option>
-              <option value="2">Ong</option>
+            <option [value]="'VOLUNTEER'" selected>Voluntário</option>
+            <option [value]="'ONG'">Ong</option>
             </select>
           </div>
 
@@ -126,7 +126,7 @@
             (click)="createUser()"
             [disabled]="!form.valid"
           >
-            Entrar
+            Registrar
           </button>
         </form>
       </div>
