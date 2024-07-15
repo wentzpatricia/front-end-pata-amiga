@@ -10,12 +10,12 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAGQ9IiMX9iNfEIpzBZSUpY8EcBbEc-SfM",
-  authDomain: "patas-amigass.firebaseapp.com",
-  projectId: "patas-amigass",
-  storageBucket: "patas-amigass.appspot.com",
-  messagingSenderId: "48281540392",
-  appId: "1:48281540392:web:321fd35ed8566acf94221d"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 }
 
 export const appConfig: ApplicationConfig = {
