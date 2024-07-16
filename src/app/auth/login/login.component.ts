@@ -1,19 +1,18 @@
+import { Auth } from '@angular/fire/auth';
+import { authState } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+
 import { Observable, of, switchMap } from 'rxjs';
 import { User } from 'firebase/auth';
-import { Auth } from '@angular/fire/auth';
-import { authState } from '@angular/fire/auth';
+
+import { AuthService } from '../auth.service';
 import { UserService } from '../../core/_service/userData.service';
+
 import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-})
+@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
 export class LoginComponent implements OnInit {
   currentUser$: Observable<User | null>;
   errorMessage!: string;

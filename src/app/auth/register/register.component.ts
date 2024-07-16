@@ -1,20 +1,18 @@
+import { Auth, authState } from '@angular/fire/auth';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Validations } from '../../core/_utils/validations';
-import { AuthService } from '../auth.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { User } from 'firebase/auth';
-import { Auth, authState } from '@angular/fire/auth';
+
+import { AuthService } from '../auth.service';
 import { UserService } from '../../core/_service/userData.service';
 import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
-@Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
-})
+import { Validations } from '../../core/_utils/validations';
+
+@Component({ selector: 'app-register', templateUrl: './register.component.html', styleUrl: './register.component.scss' })
 export class RegisterComponent {
   currentUser$!: Observable<User | null>;
   errorMessage: string | null = null;

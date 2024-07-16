@@ -1,14 +1,17 @@
+import { Auth } from '@angular/fire/auth';
+import { authState } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { User } from 'firebase/auth';
+
 import { AuthService } from './auth/auth.service';
 import { UserService } from './core/_service/userData.service';
-import { User } from 'firebase/auth';
-import { UserTypeEnum } from './core/_utils/UserType.enum';
-import { authState } from '@angular/fire/auth';
+
 import { Observable, switchMap } from 'rxjs';
-import { Auth } from '@angular/fire/auth';
-import { CommonModule } from '@angular/common';
+
 import { SharedModule } from './shared/shared.module';
+import { UserTypeEnum } from './core/_utils/UserType.enum';
 
 @Component({
   selector: 'app-root',
