@@ -1,4 +1,4 @@
 export enum UserTypeEnum {
-  ONG = 'ong',
-  VOLUNTEER = 'voluntário',
+  ONG = 'ONG',
+  VOLUNTEER = 'VOLUNTEER',
 }

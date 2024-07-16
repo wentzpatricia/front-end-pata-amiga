@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 
@@ -7,7 +7,7 @@ import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({ selector: 'app-header', templateUrl: './header.component.html', styleUrl: './header.component.scss' })
-export class HeaderComponent {
+export class HeaderComponent implements OnChanges{
   @Input() userType!: UserTypeEnum;
   @ViewChild('header', { read: ElementRef }) header!: ElementRef;
 
@@ -37,8 +37,18 @@ export class HeaderComponent {
     this.mdq.addListener(this.mediaQueryListener);
   }
 
-  ngOnInit() {
-    this.userType === UserTypeEnum.ONG ? this.data = this.ongNavData : this.data = this.volunteerNavData;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['userType']) {
+      this.updateNavData();
+    }
+  }
+
+  updateNavData(): void {
+    if (this.userType === UserTypeEnum.ONG) {
+      this.data = this.ongNavData;
+    } else if (this.userType === UserTypeEnum.VOLUNTEER) {
+      this.data = this.volunteerNavData;
+    }
   }
 
   getActiveClass(data: ISidebarData): string {

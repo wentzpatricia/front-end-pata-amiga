@@ -17,7 +17,7 @@ export class UserService {
       map(doc => {
         if (doc.exists()) {
           const data = doc.data() as UserInterface;
-          return { ...data, userType: data.userType }; 
+          return data;
         } else {
           return null;
         }

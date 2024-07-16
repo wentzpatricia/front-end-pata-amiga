@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { AuthGuard } from '../auth.guard';
-import { LocalStorageUtils } from '../../core/_utils/localstorage';
 import { AuthService } from '../auth.service';
+import { Observable, of, switchMap } from 'rxjs';
+import { User } from 'firebase/auth';
+import { Auth } from '@angular/fire/auth';
+import { authState } from '@angular/fire/auth';
+import { UserService } from '../../core/_service/userData.service';
+import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  currentUser$: Observable<User | null>;
   errorMessage!: string;
   formLogIn!: FormGroup;
   hide: boolean = true;
@@ -19,18 +23,18 @@ export class LoginComponent implements OnInit {
   logo = './../../../assets/icons/logo-brown.svg';
 
   constructor(
-    private authGuard: AuthGuard,
     private authService: AuthService,
+    private firebaseAuth: Auth,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    public userService: UserService, 
+  ) { this.currentUser$ = authState(this.firebaseAuth); }
 
   ngOnInit(): void {
     this.createForm();
 
     if (this.isUserAuthenticated()) {
-      //acho que vai ter que adicionar um if pelo tipo de usuário e redirecionar certinho
-      this.router.navigate(['/volunteering/my-volunteering']);
+      this.handleUserRedirection();
     }
   }
 
@@ -42,17 +46,34 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin() {
-    const rawForm = this.formLogIn.getRawValue()
+    const rawForm = this.formLogIn.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
-        this.router.navigateByUrl('/volunteering/my-volunteering');
-        console.log ('SUCESSO')
+        this.handleUserRedirection();
       },
       error: (err) => {
         this.errorMessage = err.code;
-        console.error ('ERRO', err)
+        console.error('ERRO', err);
       }
-    })
+    });
+  }
+
+  handleUserRedirection() {
+    this.currentUser$.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.userService.getUserData(user.uid);
+        } else {
+          return of(null);
+        }
+      })
+    ).subscribe(item => {
+      if (item && item.userType === UserTypeEnum.ONG) {
+        this.router.navigate(['/ong/events']);
+      } else if (item && item.userType === UserTypeEnum.VOLUNTEER) {
+        this.router.navigate(['/volunteering/my-volunteering']);
+      }
+    });
   }
 
   isUserAuthenticated(): boolean {

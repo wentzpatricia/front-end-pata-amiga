@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 
 import { Validations } from '../../core/_utils/validations';
 import { AuthService } from '../auth.service';
+import { Observable, of, switchMap } from 'rxjs';
+import { User } from 'firebase/auth';
+import { Auth, authState } from '@angular/fire/auth';
+import { UserService } from '../../core/_service/userData.service';
+import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +16,7 @@ import { AuthService } from '../auth.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  currentUser$!: Observable<User | null>;
   errorMessage: string | null = null;
   form!: FormGroup;
   hide: boolean = true;
@@ -20,16 +26,14 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
+    private firebaseAuth: Auth,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    public userService: UserService, 
+  ) {this.currentUser$ = authState(this.firebaseAuth);}
 
   ngOnInit(): void {
     this.createForm();
-
-    // if (this.isUserAuthenticated()) {
-    //   this.router.navigate(['/dashboard']);
-    // }
   }
 
   createForm() {
@@ -51,14 +55,30 @@ export class RegisterComponent {
     const rawForm = this.form.getRawValue();
     this.authService.register(rawForm.email, rawForm.username, rawForm.confirmPassword, rawForm.userType).subscribe({
       next: () => {
-        // this.router.navigateByUrl('auth/login');
-        console.log ('SUCESSO')
       },
       error: (err) => {
         this.errorMessage = err.code;
         console.error ('ERRO', err)
       }
     })
+  }
+
+  handleUserRedirection() {
+    this.currentUser$.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.userService.getUserData(user.uid);
+        } else {
+          return of(null);
+        }
+      })
+    ).subscribe(item => {
+      if (item && item.userType === UserTypeEnum.ONG) {
+        this.router.navigate(['/ong/events']);
+      } else if (item && item.userType === UserTypeEnum.VOLUNTEER) {
+        this.router.navigate(['/volunteering/my-volunteering']);
+      }
+    });
   }
 
   isUserAuthenticated(): boolean {

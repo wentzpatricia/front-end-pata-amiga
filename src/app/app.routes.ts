@@ -1,9 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
-import { UserTypeEnum } from './core/_utils/UserType.enum';
 
-let userType: UserTypeEnum = UserTypeEnum.VOLUNTEER;
 export const routes: Routes = [
   {
     path: 'auth',
@@ -23,10 +21,10 @@ export const routes: Routes = [
         (m) => m.VolunteerModule
       ),
   },
-  {
-    path: '',
-    redirectTo: '/volunteering/my-volunteering',
-    pathMatch: 'full',
-  },
-  { path: '**', redirectTo: '/volunteering/my-volunteering' }
+  // {
+  //   path: '',
+  //   redirectTo: '/auth/login',
+  //   pathMatch: 'full',
+  // },
+  // { path: '**', redirectTo: '/auth/login' }
 ];
