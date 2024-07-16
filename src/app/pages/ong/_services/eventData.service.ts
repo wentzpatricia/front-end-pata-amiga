@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { EventInterface } from './event.interface';
+import { EventInterface } from '../_models/event.interface';
 import { addDoc, collection, deleteDoc, DocumentData, getDocs, query, QuerySnapshot, setDoc, where } from 'firebase/firestore';
 
 @Injectable({
