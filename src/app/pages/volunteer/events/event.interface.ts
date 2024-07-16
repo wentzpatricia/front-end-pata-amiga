@@ -1,7 +1,10 @@
-import { EventTypeEnum } from "../../../core/_utils/EventTypeEnum.enum";
+import { Timestamp } from "firebase/firestore";
+import { UserInterface } from "../../../auth/register/_models/user.interface";
 
 export interface EventInterface {
-    date_at: Date;
-    address: string;
-    eventType?: EventTypeEnum;
+    uid?: string | undefined;
+    date_at: Date | Timestamp;
+    local: string;
+    type: string;
+    user?: UserInterface | undefined;
 }
