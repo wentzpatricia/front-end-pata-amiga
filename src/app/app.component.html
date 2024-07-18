@@ -4,7 +4,8 @@
 <div
   [ngClass]="{
     'main-auth': isUserAuthenticated(),
-    'main-not-auth': !isUserAuthenticated()
+    'main-not-auth': !isUserAuthenticated(),
+    'is-mobile': mdq.matches
   }"
 >
   <router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 import { Auth } from '@angular/fire/auth';
 import { authState } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { User } from 'firebase/auth';
 
@@ -12,6 +12,7 @@ import { Observable, switchMap } from 'rxjs';
 
 import { SharedModule } from './shared/shared.module';
 import { UserTypeEnum } from './core/_utils/UserType.enum';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -21,15 +22,23 @@ import { UserTypeEnum } from './core/_utils/UserType.enum';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  userType!: UserTypeEnum;
+  
   currentUser$: Observable<User | null>;
-
+  mdq: MediaQueryList;
+  mediaQueryListener: () => void;
+  userType!: UserTypeEnum;
   constructor(
     private authService: AuthService,
+    private changeDetectorRef: ChangeDetectorRef,
     private firebaseAuth: Auth,
+    private media: MediaMatcher,
     public userService: UserService,
   ) {
     this.currentUser$ = authState(this.firebaseAuth);
+
+    this.mdq = media.matchMedia('(max-width: 992px)');
+    this.mediaQueryListener = () => changeDetectorRef.detectChanges();
+    this.mdq.addListener(this.mediaQueryListener);
   }
 
   ngOnInit(): void {

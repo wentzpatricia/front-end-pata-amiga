@@ -1,1 +1,46 @@
-<p>events works!</p>
+<section class="events">
+    <header class="events__header">
+        <h2 class="events__header_title">Próximos eventos
+            <span>Aqui estão centralizados todos os seus próximos eventos como voluntário</span>
+        </h2>
+    </header>
+
+    <div class="container-events">
+        @if (date.length > 0) {
+            <header class="container-events__header row">
+                <h3 class="col">Data</h3>
+                <h3 class="col-4">Local</h3>
+                <h3 class="col">Atividade</h3>
+                <h3 class="col">Ações</h3>
+            </header>
+        }
+        @for(item of date; track item){
+            <div class="row card-list">
+                <div class="col card-list__container">
+                    <span>Data</span>
+                    <h3>{{item.date_at}}</h3>
+                </div>
+                <div class="col-4 card-list__container">
+                    <span>Local</span>
+                    <h3>{{item.local}}</h3>
+                </div>
+                <div class="col card-list__container">
+                    <span>Atividade</span>
+                    <h3 class="activity" [ngClass]="{ 'bath': item.type === EventTypeEnum.BATH,
+                    'transport': item.type === EventTypeEnum.TRANSPORT,
+                    'event': item.type ===  EventTypeEnum.EVENT }">
+                    {{ item.type }}
+                </h3>
+                </div>
+                <div class="col card-list__container">
+                    <span>Ações</span>
+                    <i class="pi pi-ellipsis-v"></i>
+                </div>
+            </div>
+
+        }@empty{
+            Você não se cadastrou em nenhum evento como voluntária ainda ):
+        }
+    </div>
+    
+</section>
