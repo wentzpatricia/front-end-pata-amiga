@@ -1,0 +1,26 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/theme.scss';
+@import '../../../scss/mixins.scss';
+
+.my-volunteering {
+    display: flex; 
+    flex-direction: column;
+
+    &__header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        &_title {
+            display: flex;
+            flex-direction: column;
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bolder;
+            
+            span { 
+                font-size: $font-size-psmall; 
+                font-weight: $font-weight-semibold;
+            }
+        }
+    }
+}
