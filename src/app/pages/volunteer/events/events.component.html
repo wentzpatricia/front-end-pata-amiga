@@ -9,9 +9,9 @@
         @if (date.length > 0) {
             <header class="container-events__header row">
                 <h3 class="col">Data</h3>
-                <h3 class="col-4">Local</h3>
-                <h3 class="col">Atividade</h3>
-                <h3 class="col">Ações</h3>
+                <h3 class="col-5">Local</h3>
+                <h3 class="col-3">Atividade</h3>
+                <h3 class="col-1">Ações</h3>
             </header>
         }
         @for(item of date; track item){
@@ -20,11 +20,11 @@
                     <span>Data</span>
                     <h3>{{item.date_at}}</h3>
                 </div>
-                <div class="col-4 card-list__container">
+                <div class="col-5 card-list__container">
                     <span>Local</span>
                     <h3>{{item.local}}</h3>
                 </div>
-                <div class="col card-list__container">
+                <div class="col-3 card-list__container">
                     <span>Atividade</span>
                     <h3 class="activity" [ngClass]="{ 'bath': item.type === EventTypeEnum.BATH,
                     'transport': item.type === EventTypeEnum.TRANSPORT,
@@ -32,9 +32,17 @@
                     {{ item.type }}
                 </h3>
                 </div>
-                <div class="col card-list__container">
+                <div class="col-1 card-list__container">
                     <span>Ações</span>
-                    <i class="pi pi-ellipsis-v"></i>
+                    
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>
+                            <i class="pi pi-ellipsis-v"></i>
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem> <i class="pi pi-plus"></i> Me candidatar ao evento  </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -33,6 +33,8 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+//formss
+
 .form-control,
 .form-select {
   background-color: $background;
@@ -59,4 +61,45 @@ body::-webkit-scrollbar-thumb {
 
 .form-control.is-invalid {
   background-image: none;
+}
+
+
+//dropdown
+
+.btn:hover, 
+.btn-check:checked + .btn, 
+:not(.btn-check) + .btn:active, 
+.btn:first-child:active, 
+.btn.active, 
+.btn.show  {
+  background-color: transparent;
+  color: $primary;
+}
+
+.dropdown-item {
+  align-items: center;
+  display: flex;
+  color: $primary;
+  font-weight: $font-weight-semibold !important;
+
+  i { margin-right: 15px; }
+
+  &:hover {
+    background-color: lighten($tertiary, 70%);
+    color: $primary;
+    font-weight: $font-weight-semibold !important;
+  }
+}
+
+.dropdown-menu.show {
+  background-color: $background;
+  border: 1px solid $primary;
+}
+
+.dropdown-toggle {
+  border: none;
+  color: $primary;
+  &::after { display: none; }
+
+  &:hover { color: $primary; }
 }
