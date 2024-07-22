@@ -30,11 +30,10 @@ export class LoginComponent implements OnInit {
   ) { this.currentUser$ = authState(this.firebaseAuth); }
 
   ngOnInit(): void {
-    this.createForm();
-
     if (this.isUserAuthenticated()) {
       this.handleUserRedirection();
     }
+    this.createForm();
   }
 
   createForm() {
@@ -67,6 +66,7 @@ export class LoginComponent implements OnInit {
         }
       })
     ).subscribe(item => {
+      console.log(item)
       if (item && item.userType === UserTypeEnum.ONG) {
         this.router.navigate(['/ong/events']);
       } else if (item && item.userType === UserTypeEnum.VOLUNTEER) {
