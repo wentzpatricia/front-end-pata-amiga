@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
-import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
-import { Firestore } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+
+import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
+
 import { EventDataService } from '../../ong/_services/eventData.service';
 import { EventInterface } from '../../ong/_models/event.interface';
-
 @Component({ selector: 'app-events', templateUrl: './events.component.html', styleUrl: './events.component.scss' })
 
 export class EventsComponent {
-    constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
+    constructor( 
+      private firebaseAuth: Auth,
+      private eventDataService: EventDataService) 
+    {}
 
     data : EventInterface[] = [];
     EventTypeEnum = EventTypeEnum; 

@@ -9,21 +9,8 @@ import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
 
 export class MyVolunteeringComponent implements OnInit {
     constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
-    events: EventInterface[] | any = [];
-
-    ngOnInit(): void {
-        if (this.firebaseAuth.currentUser !== null) {
-            if (this.firebaseAuth.currentUser.uid) {
-                this.eventDataService.getByUser(this.firebaseAuth.currentUser.uid).then((data) => {
-                    this.events = data
-                })
-            }
-        }
-    }
-
     EventTypeEnum = EventTypeEnum; 
-
-    date = [
+    events: EventInterface[] = [
         {
             date_at: '25 de julho às 18h',
             local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
@@ -44,6 +31,19 @@ export class MyVolunteeringComponent implements OnInit {
             local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
             type: EventTypeEnum.BATH
         }
-    ]
+    ];
+
+    ngOnInit(): void {
+        // if (this.firebaseAuth.currentUser !== null) {
+        //     if (this.firebaseAuth.currentUser.uid) {
+        //         this.eventDataService.getByUser(this.firebaseAuth.currentUser.uid).then((data) => {
+        //             if(data)
+        //             this.events = data;
+        //         })
+        //     }
+        // }
+    }
+
+    
 }
 

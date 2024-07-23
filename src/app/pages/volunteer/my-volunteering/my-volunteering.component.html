@@ -5,16 +5,19 @@
         </h2>
     </header>
     
-    @for(item of date; track item){
-        <div>
-            <div>
+    @for(item of events; track item){
+        <div class="container-my-volunteering row">
+            <div class="container-my-volunteering__date col-2">
                 <h3>{{item.date_at}}</h3>
             </div>
-            <div>
-                <h3>{{item.local}}</h3>
+            <div class="container-my-volunteering__infos col">
+                <h2>{{item.local}}</h2>
                 <h3>{{ item.type }}</h3>
             </div>
-            <button></button>
+            <div class="col-1">
+                <button><i class="pi pi-trash"></i></button>
+            </div>
+            
             
         </div>
 

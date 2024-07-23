@@ -2,6 +2,45 @@
 @import '../../../scss/theme.scss';
 @import '../../../scss/mixins.scss';
 
+
+.container-my-volunteering {
+    align-items: center;
+    background-color: $white;
+    border-radius: 15px;
+    box-shadow: $box-shadow-sm;
+    display: flex;
+    height: 150px;
+    margin: 10px 0;
+    &__date {
+        align-items: center;
+        background-color: $secondary;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+        justify-content: center;
+        margin: 0 15px;
+        padding: 15px;
+
+        h3 {
+            font-size: $font-size-large;
+            text-align: center;
+        }
+    }
+
+    &__infos {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: $font-size-small;
+            font-weight: $font-weight-bolder;
+        }
+
+        h3 { font-size: $font-size-small; }
+    }
+}
+
 .my-volunteering {
     display: flex; 
     flex-direction: column;
