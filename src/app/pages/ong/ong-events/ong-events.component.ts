@@ -76,8 +76,6 @@ export class OngEventsComponent {
   
       this.eventDataService.search(params).subscribe(events => {
         this.itens = events
-        console.log('proximos eventos')
-        console.log(this.itens)
       })
     }
 }

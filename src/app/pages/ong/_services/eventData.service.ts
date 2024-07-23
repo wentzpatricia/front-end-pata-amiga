@@ -19,9 +19,9 @@ export class EventDataService {
             querySnapshot.forEach(doc => {
                 if (doc.exists()) {
                     const data = doc.data() as DocumentData;
+                    console.log(data['date_at'])
                     const event: EventInterface = {
-                        uid: doc.id,
-                        date_at: data['date_at'].toDate(),
+                        date_at: data['date_at'],
                         local: data['local'],
                         type: data['type']
                     };
@@ -67,5 +67,34 @@ export class EventDataService {
           return dataList;
       })
     )
+  }
+
+  async getByUser(uid: string | any) {
+    const userDocRef = doc(collection(this.firestore, 'users'), uid);
+    const userDocData = await getDoc(userDocRef)
+
+    if (userDocData.exists()) {
+        const userData = userDocData.data()
+        const eventsData: any[] = userData['events'] || []
+        return eventsData.map(event => ({
+            type: event.type,
+            local: event.local,
+            date_at: new Date(event.date_at.seconds * 1000)
+        }))
+    }
+    return null
+  }
+
+  async addByUser(uid: string | any, event: EventInterface) {
+    const userDocRef = doc(collection(this.firestore, 'users'), uid);
+    const userDocData = await getDoc(userDocRef)
+    let events = []
+    if (userDocData.exists()) {
+        const userData = userDocData.data()
+        events = userData['events'] || []
+    }
+    events.push(event)
+
+    await setDoc(userDocRef, { events }, { merge: true})
   }
 }

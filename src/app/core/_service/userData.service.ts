@@ -3,6 +3,7 @@ import { Observable, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { UserInterface } from '../../auth/register/_models/user.interface';
+import { collection } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,6 @@ export class UserService {
         console.error('Error getting user document:', error);
         return of(null);
       })
-    );
+    )
   }
 }

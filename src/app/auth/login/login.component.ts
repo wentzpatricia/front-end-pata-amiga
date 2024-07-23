@@ -30,11 +30,10 @@ export class LoginComponent implements OnInit {
   ) { this.currentUser$ = authState(this.firebaseAuth); }
 
   ngOnInit(): void {
-    this.createForm();
-
     if (this.isUserAuthenticated()) {
       this.handleUserRedirection();
     }
+    this.createForm();
   }
 
   createForm() {
