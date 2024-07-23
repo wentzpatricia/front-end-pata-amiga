@@ -4,4 +4,5 @@ export interface UserInterface {
     email: string;
     username: string;
     userType?: UserTypeEnum;
+    events: [];
 }

@@ -1,30 +1,33 @@
 import { Component } from '@angular/core';
 import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
-@Component({ selector: 'app-events', templateUrl: './events.component.html', styleUrl: './events.component.scss' })
-export class EventsComponent {
+import { Firestore } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+import { EventDataService } from '../../ong/_services/eventData.service';
+import { EventInterface } from '../../ong/_models/event.interface';
 
+@Component({ selector: 'app-events', templateUrl: './events.component.html', styleUrl: './events.component.scss' })
+
+export class EventsComponent {
+    constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
+
+    data : EventInterface[] = [];
     EventTypeEnum = EventTypeEnum; 
 
-    date = [
-        {
-            date_at: '25 de julho às 18h',
-            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-            type: EventTypeEnum.BATH
-        },
-        {
-            date_at: '25 de julho às 18h',
-            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-            type: EventTypeEnum.EVENT
-        },
-        {
-            date_at: '25 de julho às 18h',
-            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-            type: EventTypeEnum.TRANSPORT
-        },
-        {
-            date_at: '25 de julho às 18h',
-            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-            type: EventTypeEnum.BATH
+    ngOnInit () {
+      let params = {
+        field: 'date_at',
+        operator: '>=',
+        value: new Date()
+      }
+  
+      this.eventDataService.search(params).subscribe(events => {
+        this.data = events
+      })
+    }
+
+    async submitEvent(event: any) {
+        if (this.firebaseAuth.currentUser?.uid) {
+            this.eventDataService.addByUser(this.firebaseAuth.currentUser?.uid, event)
         }
-    ]
+    }
 }
