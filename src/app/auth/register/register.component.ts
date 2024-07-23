@@ -31,7 +31,6 @@ export class RegisterComponent {
   ) {this.currentUser$ = authState(this.firebaseAuth);}
 
   ngOnInit(): void {
-    this.handleUserRedirection()
     this.createForm();
   }
 

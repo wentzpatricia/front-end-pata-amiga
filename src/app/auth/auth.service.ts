@@ -27,11 +27,8 @@ export class AuthService {
     }
     
     login(email: string, password:string): Observable<void> {
-        console.log('login')
         const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password  
-        ).then(() => {
-            console.log('logou')
-        })
+        ).then(() => {})
         return from(promise);
       }
 
@@ -42,6 +39,6 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return this.firebaseAuth.currentUser !== null;
+        return !!this.firebaseAuth.currentUser;
     }
 }

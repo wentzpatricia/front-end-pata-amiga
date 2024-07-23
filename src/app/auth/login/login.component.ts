@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
         }
       })
     ).subscribe(item => {
-      console.log(item)
       if (item && item.userType === UserTypeEnum.ONG) {
         this.router.navigate(['/ong/events']);
       } else if (item && item.userType === UserTypeEnum.VOLUNTEER) {
