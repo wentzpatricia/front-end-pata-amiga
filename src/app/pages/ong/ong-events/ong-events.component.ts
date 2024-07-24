@@ -17,12 +17,12 @@ export class OngEventsComponent {
       // })
 
       // salvar
-      let event : EventInterface = {
-        date_at: new Date(),
-        local: 'Iguatemi',
-        type: EventTypeEnum.BATH
-      }
-      this.eventDataService.save(event)
+      // let event : EventInterface = {
+      //   date_at: new Date(),
+      //   local: 'Iguatemi',
+      //   type: EventTypeEnum.BATH
+      // }
+      // this.eventDataService.save(event)
 
       // let event2 : EventInterface = {
       //   date_at: new Date((new Date()).setDate((new Date()).getDate() + 2)),
