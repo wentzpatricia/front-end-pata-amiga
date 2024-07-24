@@ -5,10 +5,12 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { OngEventsComponent } from './ong-events/ong-events.component';
 import { OngRoutingModule } from './ong-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { EventFormComponent } from './_components/event-form/event-form.component';
 
 @NgModule({
   declarations: [
-    OngEventsComponent
+    EventFormComponent,
+    OngEventsComponent    
   ],
   imports: [
     CommonModule,
