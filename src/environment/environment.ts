@@ -1,8 +1,8 @@
 export const environment = {
-    API_KEY : "AIzaSyBwVS4XFcWnHqdp-bZXdVHdj6UUpqgITL8",
-    AUTH_DOMAIN : "projetopataamiga.firebaseapp.com",
-    PROJECT_ID : "projetopataamiga",
-    STORAGE_BUCKET : "projetopataamiga.appspot.com",
-    MESSAGING_SENDER_ID :"725475576474",
-    APP_ID : "1:725475576474:web:c9bf2cb2f14df1e2ed2d23"
+    API_KEY : "AIzaSyAGQ9IiMX9iNfEIpzBZSUpY8EcBbEc-SfM",
+    AUTH_DOMAIN : "patas-amigass.firebaseapp.com",
+    PROJECT_ID : "patas-amigass",
+    STORAGE_BUCKET : "patas-amigass.appspot.com",
+    MESSAGING_SENDER_ID :"48281540392",
+    APP_ID : "1:48281540392:web:321fd35ed8566acf94221d"
 }

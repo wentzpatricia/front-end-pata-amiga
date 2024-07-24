@@ -19,9 +19,14 @@ export class EventsComponent {
         operator: '>=',
         value: new Date()
       }
-  
-      this.eventDataService.search(params).subscribe(events => {
-        this.data = events
+
+      this.eventDataService.search(params).subscribe({
+        next : (events) => {
+          this.data = events
+        },
+        error: (err) => {
+          alert(err)
+        }
       })
     }
 
