@@ -10,6 +10,7 @@ export class ButtonComponent implements IButtonProps {
 
   @Input() border!: 'primary' | 'secondary' | 'danger' | 'disabled' | 'success';
   @Input() color!: 'primary' | 'secondary' | 'danger' | 'disabled' | 'success';
+  @Input() icon: string = '';
   @Input() isLoading!: boolean;
   @Input() label: string = '';
   @Input() set outline(value: boolean) { this._outline = value !== null && `${value}` !== 'false';}
