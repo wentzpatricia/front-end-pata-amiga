@@ -6,16 +6,16 @@
     </header>
     
     @for(item of events; track item){
-        <div class="container-my-volunteering row">
-            <div class="container-my-volunteering__date col-2">
+        <div class="row container-my-volunteering ">
+            <div class="col-2 container-my-volunteering__date">
                 <h3>{{item.date_at}}</h3>
             </div>
-            <div class="container-my-volunteering__infos col">
+            <div class="col container-my-volunteering__infos">
                 <h2>{{item.local}}</h2>
                 <h3>{{ item.type }}</h3>
             </div>
-            <div class="col-1">
-                <button><i class="pi pi-trash"></i></button>
+            <div class="col-2 container-my-volunteering__btn">
+                <button customButton color="danger" [label]="'Desistir'" [icon]="'pi-trash'"></button>
             </div>
             
             

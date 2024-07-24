@@ -11,10 +11,23 @@
     display: flex;
     height: 150px;
     margin: 10px 0;
+
+    @include tablet {
+        flex-direction: column !important;
+        height: auto;
+    }
+
+    &__btn {
+        @include tablet { width: 100%; }
+
+        button { margin: 0 15px 25px 15px;}
+    }
+
     &__date {
         align-items: center;
         background-color: $secondary;
         border-radius: 15px;
+        box-shadow: $box-shadow-sm;
         display: flex;
         flex-direction: column;
         height: 120px;
@@ -24,8 +37,14 @@
 
         h3 {
             font-size: $font-size-large;
+            font-weight: $font-weight-bolder;
             text-align: center;
         }
+
+        @include tablet {
+            margin: 25px 15px;
+            width: 90%;
+         }
     }
 
     &__infos {
@@ -38,6 +57,11 @@
         }
 
         h3 { font-size: $font-size-small; }
+
+        @include tablet { 
+            margin: 25px 15px;
+            width: 90%; 
+        }
     }
 }
 
@@ -49,6 +73,7 @@
         align-items: center;
         display: flex;
         justify-content: space-between;
+        margin-bottom: 25px;
 
         &_title {
             display: flex;
