@@ -10,37 +10,28 @@ import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
 export class MyVolunteeringComponent implements OnInit {
     constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
     EventTypeEnum = EventTypeEnum; 
-    events: EventInterface[] = [];
-        //     {
-        //         date_at: '25 de julho às 18h',
-        //         local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-        //         type: EventTypeEnum.BATH
-        //     },
-        //     {
-        //         date_at: '25 de julho às 18h',
-        //         local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-        //         type: EventTypeEnum.EVENT
-        //     },
-        //     {
-        //         date_at: '25 de julho às 18h',
-        //         local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-        //         type: EventTypeEnum.TRANSPORT
-        //     },
-        //     {
-        //         date_at: '25 de julho às 18h',
-        //         local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
-        //         type: EventTypeEnum.BATH
-        //     }
-        // ];
-    
+    events: EventInterface[] = [
+        {
+            date_at: new Date(),
+            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+            type: EventTypeEnum.BATH
+        },
+        {
+            date_at: new Date(),
+            local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+            type: EventTypeEnum.EVENT
+        }
+    ];
+
     ngOnInit(): void {
-        // if (this.firebaseAuth.currentUser !== null) {
-        //     if (this.firebaseAuth.currentUser.uid) {
-        //         this.eventDataService.getByUser(this.firebaseAuth.currentUser.uid).then((data) => {
-        //             if(data)
-        //             this.events = data;
-        //         })
-        //     }
-        // }
+        if (this.firebaseAuth.currentUser !== null) {
+            // if (this.firebaseAuth.currentUser.uid) {
+            //     this.eventDataService.getByUser(this.firebaseAuth.currentUser.uid).then((data) => {
+            //         // if(data)
+            //         //     // this.events = data;
+            //         // })
+            //     }
+            // })
+        }
     }
 }

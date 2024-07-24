@@ -13,8 +13,20 @@ export class EventsComponent {
       private eventDataService: EventDataService) 
     {}
 
-    data : EventInterface[] = [];
+    // data : EventInterface[] = [];
     EventTypeEnum = EventTypeEnum; 
+    data: EventInterface[] = [
+      {
+          date_at: new Date(),
+          local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+          type: EventTypeEnum.BATH
+      },
+      {
+          date_at: new Date(),
+          local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+          type: EventTypeEnum.EVENT
+      }
+    ];
 
     ngOnInit () {
       let params = {
@@ -25,17 +37,22 @@ export class EventsComponent {
 
       this.eventDataService.search(params).subscribe({
         next : (events) => {
-          this.data = events
+          console.log(events)
+      //     this.data = events
         },
         error: (err) => {
-          alert(err)
+          console.log(err)
         }
       })
     }
 
     async submitEvent(event: any) {
         if (this.firebaseAuth.currentUser?.uid) {
+          try {
             this.eventDataService.addByUser(this.firebaseAuth.currentUser?.uid, event)
+          } catch (err) {
+            console.log(err)
+          }
         }
     }
 }

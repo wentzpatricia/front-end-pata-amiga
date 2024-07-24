@@ -48,25 +48,27 @@ export class EventDataService {
   search (params : any) : Observable<EventInterface[]> {
     const searchPipe = query(collection(this.firestore, "events"), where(params.field, params.operator, params.value))
 
+    console.log(searchPipe)
+
     return from(getDocs(searchPipe))
-    .pipe(
-      map(querySnapshot => {
-          const dataList: EventInterface[] = [];
-          querySnapshot.forEach(doc => {
-              if (doc.exists()) {
-                  const data = doc.data() as DocumentData;
-                  const event: EventInterface = {
-                      uid: doc.id,
-                      date_at: data['date_at'].toDate(),
-                      local: data['local'],
-                      type: data['type']
-                  };
-                  dataList.push(event);
-              }
-          });
-          return dataList;
-      })
-    )
+      .pipe(
+        map(querySnapshot => {
+            const dataList: EventInterface[] = [];
+            querySnapshot.forEach(doc => {
+                if (doc.exists()) {
+                    const data = doc.data() as DocumentData;
+                    const event: EventInterface = {
+                        uid: doc.id,
+                        date_at: data['date_at'].toDate(),
+                        local: data['local'],
+                        type: data['type']
+                    };
+                    dataList.push(event);
+                }
+            });
+            return dataList;
+        })
+      )
   }
 
   async getByUser(uid: string | any) {
