@@ -9,7 +9,7 @@ export class MyVolunteeringComponent implements OnInit {
     constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
     events: EventInterface[] | any = [];
 
-    ngOnInit(): void {
+    ngOnInit(): void { 
         if (this.firebaseAuth.currentUser !== null) {
             if (this.firebaseAuth.currentUser.uid) {
                 this.eventDataService.getByUser(this.firebaseAuth.currentUser.uid).then((data) => {
