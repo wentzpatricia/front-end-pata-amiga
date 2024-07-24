@@ -9,7 +9,33 @@ import { Firestore } from '@angular/fire/firestore';
 export class OngEventsComponent {
   constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
 
-  data : EventInterface[] = [];
+  data : any[] = [
+        
+    {
+        date_at: '25 de julho às 18h',
+        local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+        type: EventTypeEnum.BATH,
+        volunteer: 'Mariana'
+    },
+    {
+      date_at: '25 de julho às 18h',      
+      local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+      type: EventTypeEnum.BATH,
+      volunteer: 'Mariana'
+    },
+    {
+      date_at: '25 de julho às 18h',      
+      local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+      type: EventTypeEnum.BATH,
+      volunteer: 'Mariana'
+    },
+    {
+      date_at: '25 de julho às 18h',      
+      local: 'Avenida João Wallig, 1800,Jardim Europa, Porto Alegre - RS',
+      type: EventTypeEnum.BATH,
+      volunteer: 'Mariana'
+    }
+];
   EventTypeEnum = EventTypeEnum; 
 
   ngOnInit () {

@@ -5,7 +5,7 @@ import { OngEventsComponent } from './ong-events/ong-events.component';
 
 
 const routes: Routes = [
-  { path: 'ong-events', component: OngEventsComponent }  
+  { path: 'events', component: OngEventsComponent }  
 
 ];
 

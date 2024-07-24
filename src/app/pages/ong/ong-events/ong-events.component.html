@@ -8,9 +8,8 @@
     <div class="container-events">
         @if (data.length > 0) {
             <header class="container-events__header row">
-                <h3 class="col">Data</h3>
-                <h3 class="col-1">Hora</h3>
-                <h3 class="col-5">Local</h3>
+                <h3 class="col">Data</h3>                
+                <h3 class="col-3">Local</h3>
                 <h3 class="col-3">Atividade</h3>
                 <h3 class="col-3">Nome</h3>
                 <h3 class="col-1">Ações</h3>
@@ -21,12 +20,8 @@
                 <div class="col card-list__container">
                     <span>Data</span>
                     <h3>{{ item.date_at }}</h3>
-                </div>
-                <div class="col card-list__container">
-                    <span>Hora</span>
-                    <!-- <h3>{{ item.hour }}</h3> -->
-                </div>
-                <div class="col-5 card-list__container">
+                </div>                
+                <div class="col-3 card-list__container">
                     <span>Local</span>
                     <h3>{{item.local}}</h3>
                 </div>
@@ -40,7 +35,7 @@
                 </div>
                 <div class="col-3 card-list__container">
                     <span>Voluntário</span>
-                    <!-- <h3>{{ item.voluntario }}</h3> -->
+                    <h3>{{ item.volunteer }}</h3> 
                 </div>
                 <div class="col-1 card-list__container">
                     <span>Ações</span>
@@ -49,7 +44,7 @@
                             <i class="pi pi-ellipsis-v"></i>
                         </button>
                         <div ngbDropdownMenu>
-                            <button ngbDropdownItem (click)="submitEvent(item)"><i class="pi pi-plus"></i>Quero me candidatar</button>
+                            <button ngbDropdownItem (click)="submitEvent(item)"><i class="pi pi-plus"></i>Editar</button>
                         </div>
                     </div>
                 </div>
