@@ -1,12 +1,14 @@
 import { Auth } from '@angular/fire/auth';
-import { Component,  OnInit, inject } from '@angular/core';
+import { Component,  OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { EventDataService } from '../../ong/_services/eventData.service';
 import { EventInterface } from '../../ong/_models/event.interface';
 import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
 import { Firestore } from '@angular/fire/firestore';
+import { EventFormComponent } from '../_components/event-form/event-form.component';
 
 @Component({ selector: 'app-ong-events', templateUrl: './ong-events.component.html', styleUrl: './ong-events.component.scss' })
 export class OngEventsComponent {
+  @ViewChild('content') modal!: EventFormComponent;
   constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
 
   data : any[] = [
@@ -48,6 +50,10 @@ export class OngEventsComponent {
     this.eventDataService.search(params).subscribe(events => {
       this.data = events
     })
+  }
+  openModal(content: TemplateRef<any>) {
+    console.log("kkkkkkkk")
+    this.modal.open(content);
   }
 
   async submitEvent(event: any) {

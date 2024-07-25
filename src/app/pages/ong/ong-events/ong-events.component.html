@@ -3,6 +3,7 @@
         <h2 class="events__header_title">Próximos eventos
             <span>Aqui estão centralizados todos os voluntários e seus eventos</span>
         </h2>
+        <button customButton color="primary" label="Adicionar" (click)="open(content)"></button>
     </header>
 
     <div class="container-events">
@@ -44,7 +45,7 @@
                             <i class="pi pi-ellipsis-v"></i>
                         </button>
                         <div ngbDropdownMenu>
-                            <button ngbDropdownItem (click)="submitEvent(item)"><i class="pi pi-plus"></i>Editar</button>
+                            <button ngbDropdownItem (click)="submitEvent(item)"><i class="bi bi-pencil-square"></i>Editar</button>
                         </div>
                     </div>
                 </div>
@@ -54,3 +55,4 @@
         }
     </div>
 </section>
+<app-event-form #content></app-event-form>

@@ -1,1 +1,63 @@
-<p>event-form works!</p>
+<ng-template #content let-modal>
+	<div class="modal-header">	
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+    <div class="container-form">
+        <div class="form">
+        <h3 class="form__title">
+            <img
+            class="form__title_img"
+            src="{{ logo }}"
+            alt="Logo do sistema"
+            />Pata amiga
+        </h3>
+        <p>Cadastro de Eventos</p>
+        <form [formGroup]="form">
+            <div class="form-group">
+            <label>Local</label>
+
+            <select
+                formControlName="local"
+                class="form-select"
+                placeholder="Selecionar"
+            >
+            <option [value]="'IGUATEMI'" selected>Shopping Iguatemi</option>
+            <option [value]="'PONTAL'">Shopping Pontal</option>
+            <option [value]="'TOTAL'">Shopping Total</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="date" id="data" class="form-control" formControlName="date_f">
+            </div>
+
+            <div class="form-group">
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" class="form-control" formControlName="hour_f">
+            </div>
+            <div class="form-check">
+                <label>Atividade</label>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Banho
+                </label>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Transporte Solidário
+                </label>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Voluntário Evento
+                </label>            
+            </div>       
+            <button
+            class="btn-submit btn"
+            [disabled]="!form.valid"
+            >
+            Enviar
+            </button>        
+        </form>
+        </div>
+    </div>
+</ng-template>
