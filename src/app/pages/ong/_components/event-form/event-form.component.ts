@@ -8,6 +8,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventDataService } from '../../_services/eventData.service';
 import { EventInterface } from '../../_models/event.interface';
 import { EventTypeEnum } from '../../../../core/_utils/EventType.enum';
+import { ToastService } from '../../../../core/_service/toast.service';
 
 @Component({ selector: 'app-event-form', templateUrl: './event-form.component.html', styleUrl: './event-form.component.scss' })
 export class EventFormComponent {
@@ -24,11 +25,12 @@ export class EventFormComponent {
   editForm : boolean = false
 
   constructor(
+    private datePipe: DatePipe,
+    private eventDataService: EventDataService,
     private firebaseAuth: Auth,
     private formBuilder: FormBuilder, 
     private modalService: NgbModal,
-    private eventDataService: EventDataService,
-    private datePipe: DatePipe
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -54,23 +56,14 @@ export class EventFormComponent {
   }
 
   createForm() {
-    if (this.event !== null) {
-      this.form = this.formBuilder.group({
-        local: [this.event.local, Validators.required],
-        date_at: [this.formatDate(this.event.date_at), Validators.required],
-        hour_at: [this.formatDate(this.event.date_at, 'time'), Validators.required], 
-        type: [this.event.type, Validators.required]
-      });
-    } else {
-      this.form = this.formBuilder.group({
-        local: ['', Validators.required],
-        date_at: ['',Validators.required],
-        hour_at: ['',Validators.required], 
-        type: ['',Validators.required]
-      });
-    }
+    this.form = this.formBuilder.group({
+      local: [this.event ? this.event.local : '', Validators.required],
+      date_at: [this.event ? this.formatDate(this.event.date_at) : '', Validators.required],
+      hour_at: [this.event ? this.formatDate(this.event.date_at, 'time') : '', Validators.required],
+      type: [this.event ? this.event.type : '', Validators.required]
+    });
   }
-
+  
   doSave() : void {
     const formData = this.form.getRawValue()
 
@@ -91,19 +84,23 @@ export class EventFormComponent {
 
     if (this.editForm) {
       this.eventDataService.update(event).then(() => {
-        this.modalService.dismissAll()
-        window.location.reload()
-        this.editForm = false
+        this.modalService.dismissAll();
+        this.toastService.toastSuccess('Sucesso!', 'Evento editado');
+        window.location.reload();
+        this.editForm = false;
       }).catch((err) => {
-        console.log(err)
+        this.toastService.toastError('Erro!', 'Infelizmente não foi possível editar o evento neste momento.');
+        console.error(err);
       })
     } else {
       this.eventDataService.save(event).then(() => {
-        this.modalService.dismissAll()
-        window.location.reload()
-        this.editForm = false
+        this.modalService.dismissAll();
+        this.toastService.toastSuccess('Sucesso!', 'Evento criado');
+        window.location.reload();
+        this.editForm = false;
       }).catch((err) => {
-        console.log(err)
+        this.toastService.toastError('Erro!', 'Infelizmente não foi possível criar um novo evento neste momento.');
+        console.error(err);
       })
     }
   }
@@ -119,7 +116,7 @@ export class EventFormComponent {
       this.editForm = false
     }
 
-    this.createForm()
+    this.createForm();
 
     this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {

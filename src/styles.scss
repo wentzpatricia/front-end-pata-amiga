@@ -1,6 +1,7 @@
 @import "bootstrap/scss/bootstrap";
 @import "./app/scss/theme.scss";
 @import "primeicons/primeicons.css";
+@import 'ngx-toastr/toastr';
 
 body {
   background-color: $background;
@@ -103,3 +104,11 @@ body::-webkit-scrollbar-thumb {
 
   &:hover { color: $primary; }
 }
+
+.toast-container {
+  position: fixed !important;
+  top: 7px;
+  right: 7px;
+}
+
+.toast-message { font-size: 14px; }

@@ -1,20 +1,22 @@
 import { Auth } from '@angular/fire/auth';
 import { authState } from '@angular/fire/auth';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Event, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
+
 import { User } from 'firebase/auth';
 
 import { AuthService } from './auth/auth.service';
+import { LoaderService } from './core/_service/loader.service';
 import { UserService } from './core/_service/userData.service';
 
 import { Observable, switchMap } from 'rxjs';
 
-import { DatePipe } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { UserTypeEnum } from './core/_utils/UserType.enum';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { LoaderService } from './core/_service/loader.service';
+
 
 @Component({
   selector: 'app-root',

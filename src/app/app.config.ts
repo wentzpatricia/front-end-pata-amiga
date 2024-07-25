@@ -1,14 +1,18 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+
 import { routes } from './app.routes';
 import { environment } from '../environment/environment';
-import { DatePipe } from '@angular/common';
+
+import { provideToastr } from 'ngx-toastr';
 
 const firebaseConfig = {
   apiKey: environment.API_KEY,
@@ -24,6 +28,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     importProvidersFrom(BrowserModule), 
     importProvidersFrom(BrowserAnimationsModule),
+    provideToastr({
+        timeOut: 10000,
+        positionClass: 'toast-bottom-right',
+        autoDismiss: true,
+        maxOpened: 3
+      }), 
     DatePipe,
     provideHttpClient(), provideFirebaseApp(() => initializeApp(firebaseConfig)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())]
 };
