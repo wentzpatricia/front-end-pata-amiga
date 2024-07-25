@@ -4,40 +4,21 @@
             <span>Aqui estão centralizados todos os seus próximos eventos como voluntário</span>
         </h2>
     </header>
-    <div class="container-events">
-        @for(event of events; track event){
-            <div class="row card-list">
-                <div class="col card-list__container">
-                    <span>Data</span>
-                    <h3></h3>
-                </div>
-                <div class="col-5 card-list__container">
-                    {{event}}
-                    <!-- <span>Local</span>
-                    <h3>{{event.local}}</h3> -->
-                </div>
-                <div class="col-3 card-list__container">
-                    <!-- <span>Atividade</span>
-                    <h3 class="activity" [ngClass]="{ 'bath': item.type === EventTypeEnum.BATH,
-                    'transport': event.type === EventTypeEnum.TRANSPORT,
-                    'event': event.type ===  EventTypeEnum.EVENT }">
-                    {{ event.type }} -->
-                <!-- </h3> -->
-                </div>
-                <div class="col-1 card-list__container">
-                    <!-- <span>Ações</span>
-                    <div ngbDropdown class="d-inline-block">
-                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>
-                            <i class="pi pi-ellipsis-v"></i>
-                        </button>
-                        <div ngbDropdownMenu>
-                            <button ngbDropdownItem (click)="submitEvent(item)">Quero me candidatar</button>
-                        </div>
-                    </div> -->
-                </div>
+
+    @for(item of events; track item){
+        <div class="row container-my-volunteering" id="{{ item.uid }}">
+            <div class="col-2 container-my-volunteering__date">
+                <h3>{{item.date_at | date:'dd/MM/yyyy hh:mm' }}</h3>
             </div>
-        } @empty {
-            Você não se cadastrou em nenhum evento como voluntária ainda:
-        }
-    </div>
+            <div class="col container-my-volunteering__infos">
+                <h2>{{item.local}}</h2>
+                <h3>{{ item.type }}</h3>
+            </div>
+            <div class="col-2 container-my-volunteering__btn">
+                <button customButton (click)="cancel(item)" color="danger" [label]="'Desistir'" [icon]="'pi-trash'"></button>
+            </div>
+        </div>
+    } @empty {
+        Você não se cadastrou em nenhum evento como voluntária ainda ):
+    }
 </section>

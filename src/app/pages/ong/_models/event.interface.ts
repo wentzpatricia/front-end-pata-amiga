@@ -1,10 +1,10 @@
-import { Timestamp } from "firebase/firestore";
 import { UserInterface } from "../../../auth/register/_models/user.interface";
 
 export interface EventInterface {
-    uid?: string | undefined;
-    date_at: Date | Timestamp;
+    uid: string;
+    date_at: Date;
     local: string;
     type: string;
-    user?: UserInterface | undefined;
+    user?: string;
+    volunteers?: UserInterface[] | any;
 }

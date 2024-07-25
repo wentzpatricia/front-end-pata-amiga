@@ -1,81 +1,50 @@
-import { Component } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Component,  OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { EventDataService } from '../../ong/_services/eventData.service';
 import { EventInterface } from '../../ong/_models/event.interface';
 import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
+import { Firestore } from '@angular/fire/firestore';
+import { EventFormComponent } from '../_components/event-form/event-form.component';
+import { UserInterface } from '../../../auth/register/_models/user.interface';
 
 @Component({ selector: 'app-ong-events', templateUrl: './ong-events.component.html', styleUrl: './ong-events.component.scss' })
-export class OngEventsComponent { 
-    itens: EventInterface[] = []
-    constructor(private eventDataService: EventDataService) {
-    }
-  
-    ngOnInit() : void {
-      // listar e deletar
-      this.eventDataService.list().subscribe(events => {
-          this.itens = events
-          console.log(this.itens)
-          this.eventDataService.delete(this.itens[0].uid as string)
-      })
-  
-      // salvar 
-      let event : EventInterface = {
-        date_at: new Date(),
-        local: 'Iguatemi',
-        type: EventTypeEnum.BATH
-      }
-      this.eventDataService.save(event)
-  
-      let event2 : EventInterface = {
-        date_at: new Date((new Date()).setDate((new Date()).getDate() + 2)),
-        local: 'Shopping Total',
-        type: EventTypeEnum.BATH
-      }
-      this.eventDataService.save(event2)
-  
-      let event3 : EventInterface = {
-        date_at: new Date((new Date()).setDate((new Date()).getDate() + 5)),
-        local: 'Shopping Total',
-        type: EventTypeEnum.BATH
-      }
-      this.eventDataService.save(event3)
-  
-      let event4 : EventInterface = {
-        date_at: new Date((new Date()).setDate((new Date()).getDate() + 7)),
-        local: 'Shopping Total',
-        type: EventTypeEnum.BATH
-      }
-      this.eventDataService.save(event4)
-  
-      // atualizar
-      let eventToUpdate : EventInterface = {
-        date_at: new Date(),
-        local: 'Bourbon Country',
-        type: EventTypeEnum.EVENT
-      }
-      this.eventDataService.update(eventToUpdate, 'fXvIqHqh0GSHqsfsuEm3')
-  
-      // pesquisar por data
-      // listar e deletar
-      let params = {
-        field: 'date_at',
-        operator: '==',
-        value: new Date()
-      }
-  
-      this.eventDataService.search(params).subscribe(events => {
-        this.itens = events
-        console.log(this.itens)
-      })
-  
-      // eventos futuros
-      params = {
-        field: 'date_at',
-        operator: '>',
-        value: new Date()
-      }
-  
-      this.eventDataService.search(params).subscribe(events => {
-        this.itens = events
+export class OngEventsComponent {
+  @ViewChild('content') modal!: EventFormComponent;
+  constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
+  EventTypeEnum = EventTypeEnum; 
+  events : EventInterface[] = []
+
+  ngOnInit () {
+    if (this.firebaseAuth.currentUser?.uid) {
+      this.eventDataService.nextEvents(this.firebaseAuth.currentUser?.uid).subscribe(events => {
+        this.events = events;
       })
     }
+  }
+
+  openModal() {    
+    this.modal.open();
+  }
+
+  openModalEdit(event: any) {    
+    this.modal.open(event);
+  }
+
+  async delete (event: any) {
+    if (event.volunteers !== undefined) {
+      event.volunteers.forEach((user: UserInterface) => {
+        this.eventDataService.removeByUser(user.uid, event)
+      })
+    }
+
+    try {
+      this.eventDataService.delete(event.uid)
+      const element = document.getElementById(event.uid)
+      if (element) {
+        element.remove()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
