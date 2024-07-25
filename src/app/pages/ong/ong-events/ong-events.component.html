@@ -57,8 +57,10 @@
                 </div>
             </div>
         } @empty {
-            Não há eventos cadastrados ):
+            <app-empty [text]="'Não há eventos cadastrados'"></app-empty>
         }
     </div>
 </section>
-<app-event-form #content></app-event-form>
+<app-event-form #content
+                (eventSaved)="onEventSaved($event)"
+                (eventUpdated)="onEventUpdated($event)"></app-event-form>
