@@ -53,4 +53,15 @@ export class OngEventsComponent {
   openModalEdit(event: EventInterface) {    
     this.modal.open(event);
   }
+
+  onEventSaved(event: EventInterface) {
+    this.events.push(event);
+  }
+
+  onEventUpdated(updatedEvent: EventInterface) {
+    const index = this.events.findIndex(e => e.uid === updatedEvent.uid);
+    if (index !== -1) {
+      this.events[index] = updatedEvent;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import { Auth } from '@angular/fire/auth';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, TemplateRef, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,6 +13,8 @@ import { ToastService } from '../../../../core/_service/toast.service';
 @Component({ selector: 'app-event-form', templateUrl: './event-form.component.html', styleUrl: './event-form.component.scss' })
 export class EventFormComponent {
   @ViewChild('content') content!: TemplateRef<any>;
+  @Output() eventSaved: EventEmitter<EventInterface> = new EventEmitter<EventInterface>();
+  @Output() eventUpdated: EventEmitter<EventInterface> = new EventEmitter<EventInterface>();
 
   closeResult = '';
   errorMessage: string | null = null;
@@ -74,7 +76,7 @@ export class EventFormComponent {
         uid = this.event.uid 
     }
 
-    let event : EventInterface = {
+    const event : EventInterface = {
       uid: uid,
       date_at: new Date(formData.date_at + 'T' + formData.hour_at),
       local: formData.local,
@@ -86,7 +88,7 @@ export class EventFormComponent {
       this.eventDataService.update(event).then(() => {
         this.modalService.dismissAll();
         this.toastService.toastSuccess('Sucesso!', 'Evento editado');
-        window.location.reload();
+        this.eventUpdated.emit(event);
         this.editForm = false;
         this.form.reset();
       }).catch((err) => {
@@ -97,7 +99,7 @@ export class EventFormComponent {
       this.eventDataService.save(event).then(() => {
         this.modalService.dismissAll();
         this.toastService.toastSuccess('Sucesso!', 'Evento criado');
-        window.location.reload();
+        this.eventSaved.emit(event);
         this.editForm = false;
       }).catch((err) => {
         this.toastService.toastError('Erro!', 'Infelizmente não foi possível criar um novo evento neste momento.');
@@ -128,5 +130,5 @@ export class EventFormComponent {
       },
     );
   }
-  
+
 }

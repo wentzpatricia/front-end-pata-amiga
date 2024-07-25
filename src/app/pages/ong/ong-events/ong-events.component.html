@@ -61,4 +61,6 @@
         }
     </div>
 </section>
-<app-event-form #content></app-event-form>
+<app-event-form #content
+                (eventSaved)="onEventSaved($event)"
+                (eventUpdated)="onEventUpdated($event)"></app-event-form>
