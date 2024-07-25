@@ -7,6 +7,7 @@ import { Observable, of, switchMap } from 'rxjs';
 import { User } from 'firebase/auth';
 
 import { AuthService } from '../auth.service';
+import { ErrorsAuthEnum } from './_models/errorsAuth.enum';
 import { UserService } from '../../core/_service/userData.service';
 import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
@@ -56,8 +57,13 @@ export class RegisterComponent {
         this.handleUserRedirection()
       },
       error: (err) => {
-        this.errorMessage = err.code;
-        console.error ('ERRO', err)
+        if (err.code && ErrorsAuthEnum[err.code as keyof typeof ErrorsAuthEnum]) {
+          const errorMessage = ErrorsAuthEnum[err.code as keyof typeof ErrorsAuthEnum];
+          this.errorMessage = errorMessage;
+        } else {
+          this.errorMessage = 'Erro desconhecido';
+        }
+        console.error('ERRO', err);
       }
     })
   }

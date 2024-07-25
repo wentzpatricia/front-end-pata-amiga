@@ -10,6 +10,7 @@ import { User } from 'firebase/auth';
 import { AuthService } from '../auth.service';
 import { UserService } from '../../core/_service/userData.service';
 
+import { ErrorsAuthEnum } from '../register/_models/errorsAuth.enum';
 import { UserTypeEnum } from '../../core/_utils/UserType.enum';
 
 @Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrls: ['./login.component.scss'] })
@@ -50,7 +51,12 @@ export class LoginComponent implements OnInit {
         this.handleUserRedirection();
       },
       error: (err) => {
-        this.errorMessage = err.code;
+        if (err.code && ErrorsAuthEnum[err.code as keyof typeof ErrorsAuthEnum]) {
+          const errorMessage = ErrorsAuthEnum[err.code as keyof typeof ErrorsAuthEnum];
+          this.errorMessage = errorMessage;
+        } else {
+          this.errorMessage = 'Erro desconhecido';
+        }
         console.error('ERRO', err);
       }
     });
