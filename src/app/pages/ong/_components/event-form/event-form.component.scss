@@ -27,6 +27,15 @@
   .form {
     width: 60%;
     padding-top: 24px;
+
+    h3 {
+      color: $primary;
+      border-bottom: 2px dashed $primary;
+      font-size: $font-size-large;
+      font-weight: $font-weight-bolder;
+      padding-bottom: 7px;
+    }
+
     @include medium-web {
       width: 80%;
     }        
@@ -55,45 +64,3 @@
         transition: 0.5s;
       }
     } 
-    
-  
-  
-  /*layout eye button inside input*/
-  .far {
-    i {
-      color: $primary-light-30;
-      margin-top: -4px;
-    }
-  }
-  .hide {
-    display: none;
-  }
-  input#password-field,
-  input#password-field-confirm {
-    border-radius: 7px;
-  }
-  .inner-addon {
-    position: relative;
-  }
-  .inner-addon .far,
-  .inner-addon .fas {
-    cursor: pointer;
-    padding: 10px;
-    position: absolute;
-    z-index: 100;
-  }
-  .left-addon .far,
-  .left-addon .fas {
-    left: 0px;
-  }
-  .right-addon .far,
-  .right-addon .fas {
-    right: 0px;
-  }
-  .left-addon input {
-    padding-left: 30px;
-  }
-  .right-addon input {
-    padding-right: 30px;
-  }
-  

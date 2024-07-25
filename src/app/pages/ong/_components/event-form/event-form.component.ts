@@ -88,6 +88,7 @@ export class EventFormComponent {
         this.toastService.toastSuccess('Sucesso!', 'Evento editado');
         window.location.reload();
         this.editForm = false;
+        this.form.reset();
       }).catch((err) => {
         this.toastService.toastError('Erro!', 'Infelizmente não foi possível editar o evento neste momento.');
         console.error(err);
