@@ -91,7 +91,6 @@ export class EventFormComponent {
 
     if (this.editForm) {
       this.eventDataService.update(event).then(() => {
-        console.log('here')
         this.modalService.dismissAll()
         window.location.reload()
         this.editForm = false

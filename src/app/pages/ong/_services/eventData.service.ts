@@ -40,7 +40,6 @@ export class EventDataService {
   }
 
   async update (event: EventInterface) {
-    console.log(event.uid)
     await setDoc(doc(this.firestore, "events", event.uid), event);
   }
 
