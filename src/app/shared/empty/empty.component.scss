@@ -1,0 +1,23 @@
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+@import "../../scss/theme.scss";
+.container-empty {
+  align-items: center;
+  border: 5px solid $secondary;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 20px;
+
+  &__img {
+    padding: 20px;
+
+    @include tablet { height: 200px !important; width: 200px !important; }
+   
+  }
+
+  &__msg { color: $secondary; font-size: $font-size-small; font-weight: bolder; margin-top: 25px; text-align: center; }
+}

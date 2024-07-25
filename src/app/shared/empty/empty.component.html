@@ -1,0 +1,9 @@
+<div class="container-empty">
+    <img src="../../../assets/images/empty-image.png" alt="Imagem de um cachorro com a língua para fora" class="container-empty__img" [ngStyle]="{ 'height': heightWidth, 'width': heightWidth }">
+    @if (!isHtml) {
+      <p class="container-empty__msg">{{ text }}</p>
+    }
+    @if (isHtml) {
+      <p class="container-empty__msg" [innerHTML]="text"></p>
+    }
+  </div>
