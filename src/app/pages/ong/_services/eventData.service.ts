@@ -6,6 +6,7 @@ import { EventInterface } from '../_models/event.interface';
 import { addDoc, collection, deleteDoc, DocumentData, getDocs, query, QuerySnapshot, setDoc, where } from 'firebase/firestore';
 import { UserInterface } from '../../../auth/register/_models/user.interface';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,8 +39,9 @@ export class EventDataService {
     await addDoc(collection(this.firestore, "events"), event);
   }
 
-  async update (event: EventInterface, id: string) {
-    await setDoc(doc(this.firestore, "events", id), event);
+  async update (event: EventInterface) {
+    console.log(event.uid)
+    await setDoc(doc(this.firestore, "events", event.uid), event);
   }
 
   async delete (id: string) {
@@ -54,8 +56,8 @@ export class EventDataService {
     );
 
     return from(getDocs(searchPipe))
-      .pipe(
-        map(querySnapshot => {
+        .pipe(
+          map(querySnapshot => {
           const dataList: EventInterface[] = [];
           querySnapshot.forEach(doc => {
             if (doc.exists()) {
