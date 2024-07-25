@@ -1,19 +1,25 @@
 import { Auth } from '@angular/fire/auth';
-import { Component,  OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
 import { EventDataService } from '../../ong/_services/eventData.service';
 import { EventInterface } from '../../ong/_models/event.interface';
 import { EventTypeEnum } from '../../../core/_utils/EventType.enum';
-import { Firestore } from '@angular/fire/firestore';
+
 import { EventFormComponent } from '../_components/event-form/event-form.component';
 import { UserInterface } from '../../../auth/register/_models/user.interface';
 
 @Component({ selector: 'app-ong-events', templateUrl: './ong-events.component.html', styleUrl: './ong-events.component.scss' })
 export class OngEventsComponent {
   @ViewChild('content') modal!: EventFormComponent;
-  constructor( private firebaseAuth: Auth, private firestore: Firestore, private eventDataService: EventDataService) {}
-  EventTypeEnum = EventTypeEnum; 
 
+  EventTypeEnum = EventTypeEnum; 
   events : EventInterface[] = []
+
+  constructor( 
+    private firebaseAuth: Auth, 
+    private eventDataService: EventDataService
+  ) {}
+
   ngOnInit () {
     if (this.firebaseAuth.currentUser?.uid) {
       this.eventDataService.nextEvents(this.firebaseAuth.currentUser?.uid).subscribe(events => {

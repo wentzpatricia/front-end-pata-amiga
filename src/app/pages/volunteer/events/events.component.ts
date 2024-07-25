@@ -26,7 +26,7 @@ export class EventsComponent {
      this.fetchPendingEvents()
     }
 
-    async submitEvent(event: any) {
+    async submitEvent(event: EventInterface) {
       if (this.firebaseAuth.currentUser?.uid) {
         try {
           if (this.firebaseAuth.currentUser?.email) {
@@ -51,6 +51,7 @@ export class EventsComponent {
     }
 
     fetchPendingEvents() {
+      if(this.firebaseAuth.currentUser?.email)
       this.eventDataService.available(this.firebaseAuth.currentUser?.email).subscribe({
         next : (events) => {
           this.data = events

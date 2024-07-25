@@ -6,5 +6,5 @@ export interface EventInterface {
     local: string;
     type: string;
     user?: string;
-    volunteers?: UserInterface[] | any;
+    volunteers?: UserInterface[];
 }

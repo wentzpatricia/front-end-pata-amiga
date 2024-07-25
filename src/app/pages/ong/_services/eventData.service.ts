@@ -38,8 +38,9 @@ export class EventDataService {
     await addDoc(collection(this.firestore, "events"), event);
   }
 
-  async update (event: EventInterface, id: string) {
-    await setDoc(doc(this.firestore, "events", id), event);
+  async update (event: EventInterface) {
+    console.log(event.uid)
+    await setDoc(doc(this.firestore, "events", event.uid), event);
   }
 
   async delete (id: string) {
@@ -52,8 +53,6 @@ export class EventDataService {
       where('user', '==', userUid),
       where('date_at', '>=', new Date())
     );
-
-    console.log(userUid)
 
     return from(getDocs(searchPipe))
       .pipe(
@@ -78,7 +77,7 @@ export class EventDataService {
   }
 
   // busca apenas eventos que o usuário NÃO tenha se voluntariado
-  available (emailUser : string | any) : Observable<EventInterface[]> {
+  available (emailUser : string ) : Observable<EventInterface[]> {
     const eventsRef = collection(this.firestore, "events")
 
     const searchPipe = query(eventsRef, 
@@ -134,7 +133,7 @@ export class EventDataService {
     return null
   }
 
-  async addByUser(uid: string | any, event: EventInterface) {
+  async addByUser(uid: string, event: EventInterface) {
     const userDocRef = doc(collection(this.firestore, 'users'), uid);
     const userDocData = await getDoc(userDocRef)
     let events = []
@@ -147,7 +146,7 @@ export class EventDataService {
     await setDoc(userDocRef, { events }, { merge: true})
   }
 
-  async removeByUser(uid: string | any, eventToCancel: EventInterface) {
+  async removeByUser(uid: string, eventToCancel: EventInterface) {
     const userDocRef = doc(collection(this.firestore, 'users'), uid);
     const userDocData = await getDoc(userDocRef)
     let events : EventInterface[] = []
@@ -163,7 +162,7 @@ export class EventDataService {
     await setDoc(userDocRef, { events }, { merge: true})
   }
 
-  async addUserOnEvent(uid: string | any, user: UserInterface) {
+  async addUserOnEvent(uid: string , user: UserInterface) {
     const eventDocRef = doc(collection(this.firestore, 'events'), uid);
     const eventDocData = await getDoc(eventDocRef)
     let volunteers = []
@@ -176,7 +175,7 @@ export class EventDataService {
     await setDoc(eventDocRef, { volunteers }, { merge: true})
   }
 
-  async removeUserOnEvent(uid: string | any, email: string | any) {
+  async removeUserOnEvent(uid: string, email: string) {
     const eventDocRef = doc(collection(this.firestore, 'events'), uid);
     const eventDocData = await getDoc(eventDocRef)
     let users : UserInterface[] = []
