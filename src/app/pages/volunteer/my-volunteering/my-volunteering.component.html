@@ -4,25 +4,21 @@
             <span>Aqui estão centralizados todos os seus próximos eventos como voluntário</span>
         </h2>
     </header>
-    
+
     @for(item of events; track item){
-        <div class="row container-my-volunteering ">
+        <div class="row container-my-volunteering" id="{{ item.uid }}">
             <div class="col-2 container-my-volunteering__date">
-                <h3>{{item.date_at}}</h3>
+                <h3>{{item.date_at | date:'dd/MM/yyyy hh:mm' }}</h3>
             </div>
             <div class="col container-my-volunteering__infos">
                 <h2>{{item.local}}</h2>
                 <h3>{{ item.type }}</h3>
             </div>
             <div class="col-2 container-my-volunteering__btn">
-                <button customButton color="danger" [label]="'Desistir'" [icon]="'pi-trash'"></button>
+                <button customButton (click)="cancel(item)" color="danger" [label]="'Desistir'" [icon]="'pi-trash'"></button>
             </div>
-            
-            
         </div>
-
-    }@empty{
+    } @empty {
         Você não se cadastrou em nenhum evento como voluntária ainda ):
     }
-    
 </section>

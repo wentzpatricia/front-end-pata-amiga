@@ -1,1 +1,44 @@
-<p>ong-events works!</p>
+<section class="events">
+    <header class="events__header">
+        <h2 class="events__header_title">Próximos eventos
+            <span>Aqui estão centralizados todos os eventos que voluntários podem se cadastrar</span>
+        </h2>
+    </header>
+
+    <div class="container-events">
+        @if (events.length > 0) {
+            <header class="container-events__header row">
+                <h3 class="col">Data</h3>
+                <h3 class="col-5">Local</h3>
+                <h3 class="col-3">Atividade</h3>
+                <h3 class="col-1">Ações</h3>
+            </header>
+        }
+        @for(event of events; track event){
+            <div class="row card-list">
+                <div class="col card-list__container">
+                    <span>Data</span>
+                    <h3>{{ event.date_at }}</h3>
+                </div>
+                <div class="col-5 card-list__container">
+                    <span>Local</span>
+                    <h3>{{event.local}}</h3>
+                </div>
+                <div class="col-3 card-list__container">
+                    <span>Atividade</span>
+                    <h3 class="activity" [ngClass]="{ 'bath': event.type === EventTypeEnum.BATH,
+                    'transport': event.type === EventTypeEnum.TRANSPORT,
+                    'event': event.type ===  EventTypeEnum.EVENT }">
+                    {{ event.type }}
+                </h3>
+                </div>
+                <div class="col-1 card-list__container">
+                    <span>Ações</span>
+                    <!--  -->
+                </div>
+            </div>
+        } @empty {
+            Não há nenhum evento cadastrado pela sua ONG
+        }
+    </div>
+</section>

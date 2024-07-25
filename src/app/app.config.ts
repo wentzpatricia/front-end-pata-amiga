@@ -18,8 +18,6 @@ const firebaseConfig = {
   appId: environment.APP_ID
 }
 
-console.log(firebaseConfig)
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
