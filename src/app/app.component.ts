@@ -10,6 +10,7 @@ import { UserService } from './core/_service/userData.service';
 
 import { Observable, switchMap } from 'rxjs';
 
+import { DatePipe } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { UserTypeEnum } from './core/_utils/UserType.enum';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -17,7 +18,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterOutlet],
+  imports: [CommonModule, SharedModule, RouterOutlet, DatePipe],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

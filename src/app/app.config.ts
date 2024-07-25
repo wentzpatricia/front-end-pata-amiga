@@ -8,6 +8,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { environment } from '../environment/environment';
+import { DatePipe } from '@angular/common';
 
 const firebaseConfig = {
   apiKey: environment.API_KEY,
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
     importProvidersFrom(BrowserModule), 
-    importProvidersFrom(BrowserAnimationsModule), 
+    importProvidersFrom(BrowserAnimationsModule),
+    DatePipe,
     provideHttpClient(), provideFirebaseApp(() => initializeApp(firebaseConfig)), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())]
 };

@@ -2,35 +2,32 @@
 	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>	
     <div class="container-form">
         <div class="form">            
-            <h3>Cadastro de Eventos</h3>
-        <form [formGroup]="form">
-            <div class="form-group">
-                <label>Local</label>
-                <select
-                    formControlName="local"
-                    class="form-select"
-                    placeholder="Selecionar">
-                    <option [value]="'Shopping Iguatemi'" selected>Shopping Iguatemi</option>
-                    <option [value]="'Shopping Pontal'">Shopping Pontal</option>
-                    <option [value]="'Shopping Total'">Shopping Total</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="data">Data</label>
-                <input type="date" id="data" class="form-control" formControlName="date_at">
-            </div>
-            <div class="form-group">
-                <label for="hora">Hora</label>
-                <input type="time" id="hora" class="form-control" formControlName="hour_at">
-            </div>
-            <div class="form-group">
-                <label for="atividade">Atividade</label>
-                <select formControlName="type" class="form-select" placeholder="Selecionar">
-                    <option [value]="EventTypeEnum.BATH" selected>Banho</option>
-                    <option [value]="EventTypeEnum.TRANSPORT">Transporte Solidário</option>
-                    <option [value]="EventTypeEnum.EVENT">Cuidar dos animais no evento</option>
-                </select>
-            </div>
+            <h3>{{ formTitle }}</h3>
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label>Local</label>
+                    <select formControlName="local" class="form-select" placeholder="Selecionar">
+                            <option [value]="'Shopping Iguatemi'" selected>Shopping Iguatemi</option>
+                            <option [value]="'Shopping Pontal'">Shopping Pontal</option>
+                            <option [value]="'Shopping Total'">Shopping Total</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input type="date" id="data" class="form-control" formControlName="date_at">
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <input type="time" id="hora" class="form-control" formControlName="hour_at">
+                </div>
+                <div class="form-group">
+                    <label for="atividade">Atividade</label>
+                    <select formControlName="type" class="form-select" placeholder="Selecionar">
+                        <option [value]="EventTypeEnum.BATH" selected>Banho</option>
+                        <option [value]="EventTypeEnum.TRANSPORT">Transporte Solidário</option>
+                        <option [value]="EventTypeEnum.EVENT">Cuidar dos animais no evento</option>
+                    </select>
+                </div>
                 <button customButton color="primary" (click)="doSave()" label="Enviar" class="btn-submit btn" [disabled]="!form.valid"></button>
             </form>
         </div>

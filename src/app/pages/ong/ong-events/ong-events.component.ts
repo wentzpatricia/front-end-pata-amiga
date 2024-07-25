@@ -24,6 +24,7 @@ export class OngEventsComponent {
     if (this.firebaseAuth.currentUser?.uid) {
       this.eventDataService.nextEvents(this.firebaseAuth.currentUser?.uid).subscribe(events => {
         this.events = events;
+        console.log(events)
       })
     }
   }
