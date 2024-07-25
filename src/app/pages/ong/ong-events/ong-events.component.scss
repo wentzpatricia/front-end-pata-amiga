@@ -1,0 +1,135 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/theme.scss';
+@import '../../../scss/mixins.scss';
+
+.container-events {
+    border: 1px solid $tertiary;
+    border-radius: 15px;
+    margin: 25px 0;
+    min-height: 400px;
+    padding: 20px;
+    position: relative;
+    
+    @include tablet { 
+        background-color: transparent; 
+        border: none; 
+        border-radius: none;
+    }
+  
+    &__header {
+        margin: 0;
+        padding: 10px 0 15px 0;
+  
+        h3 { 
+            font-size: $font-size-xsmall; 
+            font-weight: $font-weight-bolder; 
+            margin: 0; 
+            padding: 0; 
+        }
+      
+        @include tablet { display: none; }
+    }
+
+    .card-list {
+        align-items: flex-start;
+        display: flex;
+        border-bottom: 2px dotted $tertiary;
+        justify-content: space-between;
+        padding-bottom: 7px;
+        padding-top: 15px;
+        width: 100%;
+    
+        &__container {
+          @include tablet { width: 100%; }
+    
+          span {
+            display: none;
+    
+            @include tablet { 
+                display: inline; 
+                font-size: $font-size-psmall; 
+                font-weight: $font-weight-bolder; 
+                margin: 0; 
+                white-space: nowrap; }
+          }
+    
+          h3 {
+            font-size: $font-size-psmall;
+            font-weight: $font-weight-regular;
+            margin-top: 7px;
+            margin: 0;
+            word-wrap: break-word;
+            
+            @include tablet { text-align: end; }
+          }
+
+          .activity {
+            border-radius: $border-radius-flag;
+            font-size: $font-size-xsmall;
+            font-weight: $font-weight-bolder;
+            padding: 7px;
+            text-transform: capitalize;
+            white-space: nowrap;
+            width: fit-content;
+          }
+
+          .bath {
+            background-color: $sucess-background-color; 
+            color: $sucess-color;
+          }
+          .event {
+            background-color: $wait-background-color; 
+            color: $wait-color;
+          }
+          .transport {
+            background-color: $info-background-color; 
+            color: $info-color;
+          }
+
+        }
+    
+        @include tablet {
+          border: 1px solid $primary;
+          border-radius: $border-radius;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          margin: 15px 0;
+          padding: 10px 20px;
+    
+          &__container {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px dotted $tertiary;
+            justify-content: space-between;
+            margin: 0;
+            padding: 10px 0;
+            
+            span { width: 150px; }
+          }
+        }
+      }
+}
+
+.events {
+    display: flex; 
+    flex-direction: column;
+
+    &__header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        &_title {
+            display: flex;
+            flex-direction: column;
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bolder;
+            
+            span { 
+                font-size: $font-size-psmall; 
+                font-weight: $font-weight-semibold;
+            }
+        }
+    }
+}

@@ -1,1 +1,58 @@
-<p>ong-events works!</p>
+<section class="events">
+    <header class="events__header">
+        <h2 class="events__header_title">Próximos eventos
+            <span>Aqui estão centralizados todos os voluntários e seus eventos</span>
+        </h2>
+        <button customButton color="primary" label="Adicionar" (click)="openModal()"></button>
+    </header>
+
+    <div class="container-events">
+        @if (data.length > 0) {
+            <header class="container-events__header row">
+                <h3 class="col">Data</h3>                
+                <h3 class="col-3">Local</h3>
+                <h3 class="col-3">Atividade</h3>
+                <h3 class="col-3">Nome</h3>
+                <h3 class="col-1">Ações</h3>
+            </header>
+        }
+        @for(item of data; track item){
+            <div class="row card-list">
+                <div class="col card-list__container">
+                    <span>Data</span>
+                    <h3>{{ item.date_at }}</h3>
+                </div>                
+                <div class="col-3 card-list__container">
+                    <span>Local</span>
+                    <h3>{{item.local}}</h3>
+                </div>
+                <div class="col-3 card-list__container">
+                    <span>Atividade</span>
+                    <h3 class="activity" [ngClass]="{ 'bath': item.type === EventTypeEnum.BATH,
+                    'transport': item.type === EventTypeEnum.TRANSPORT,
+                    'event': item.type ===  EventTypeEnum.EVENT }">
+                    {{ item.type }}
+                </h3>
+                </div>
+                <div class="col-3 card-list__container">
+                    <span>Voluntário</span>
+                    <h3>{{ item.volunteer }}</h3> 
+                </div>
+                <div class="col-1 card-list__container">
+                    <span>Ações</span>
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="btn btn-outline-primary" ngbDropdownToggle>
+                            <i class="pi pi-ellipsis-v"></i>
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="submitEvent(item)"><i class="bi bi-pencil-square"></i>Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        } @empty {
+            Não há voluntarios cadastrados ):
+        }
+    </div>
+</section>
+<app-event-form #content></app-event-form>
