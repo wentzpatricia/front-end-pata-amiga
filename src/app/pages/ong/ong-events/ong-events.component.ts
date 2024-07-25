@@ -51,9 +51,9 @@ export class OngEventsComponent {
       this.data = events
     })
   }
-  openModal(content: TemplateRef<any>) {
+  openModal() {
     console.log("kkkkkkkk")
-    this.modal.open(content);
+    this.modal.open();
   }
 
   async submitEvent(event: any) {

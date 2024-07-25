@@ -33,9 +33,10 @@ export class EventFormComponent {
 ngOnInit(): void {
   this.createForm();
 }
-open(content: TemplateRef<any>) {
+
+open() {
   console.log("euaihaeiuhaeui")
-  this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+  this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
     (result) => {
       this.closeResult = `Closed with: ${result}`;
     },
