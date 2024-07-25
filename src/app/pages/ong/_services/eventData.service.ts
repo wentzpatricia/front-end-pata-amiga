@@ -46,29 +46,35 @@ export class EventDataService {
     await deleteDoc(doc(this.firestore, "events", id));
   }
 
-  search (params : any) : Observable<EventInterface[]> {
-    const searchPipe = query(collection(this.firestore, "events"), where(params.field, params.operator, params.value))
+  nextEvents (userUid: string) : Observable<EventInterface[]> {
+    const eventsRef = collection(this.firestore, "events")
+    const searchPipe = query(eventsRef,
+      where('user', '==', userUid),
+      where('date_at', '>=', new Date())
+    );
+
+    console.log(userUid)
 
     return from(getDocs(searchPipe))
       .pipe(
         map(querySnapshot => {
-            const dataList: EventInterface[] = [];
-            querySnapshot.forEach(doc => {
-                if (doc.exists()) {
-                    const data = doc.data() as DocumentData;
-                    const event: EventInterface = {
-                        uid: doc.id,
-                        date_at: data['date_at'].toDate(),
-                        local: data['local'],
-                        type: data['type'],
-                        volunteers: data['volunteers']
-                    };
-                    dataList.push(event);
-                }
-            });
-            return dataList;
-        })
-      )
+          const dataList: EventInterface[] = [];
+          querySnapshot.forEach(doc => {
+            if (doc.exists()) {
+              const data = doc.data() as DocumentData;
+              const event: EventInterface = {
+                uid: doc.id,
+                date_at: data['date_at'].toDate(),
+                local: data['local'],
+                type: data['type'],
+                volunteers: data['volunteers'] 
+              };
+              dataList.push(event);
+            }
+          });
+        return dataList;
+      })
+    )
   }
 
   // busca apenas eventos que o usuário NÃO tenha se voluntariado

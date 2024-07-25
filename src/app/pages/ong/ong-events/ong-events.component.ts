@@ -15,15 +15,11 @@ export class OngEventsComponent {
 
   events : EventInterface[] = []
   ngOnInit () {
-    let params = {
-      field: 'date_at',
-      operator: '>=',
-      value: new Date()
+    if (this.firebaseAuth.currentUser?.uid) {
+      this.eventDataService.nextEvents(this.firebaseAuth.currentUser?.uid).subscribe(events => {
+        this.events = events
+      })
     }
-
-    this.eventDataService.search(params).subscribe(events => {
-      this.events = events
-    })
   }
 
   openModal() {    
