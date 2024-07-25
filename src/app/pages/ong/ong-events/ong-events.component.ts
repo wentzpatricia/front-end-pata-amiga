@@ -23,20 +23,13 @@ export class OngEventsComponent {
   ngOnInit () {
     if (this.firebaseAuth.currentUser?.uid) {
       this.eventDataService.nextEvents(this.firebaseAuth.currentUser?.uid).subscribe(events => {
-        this.events = events
+        this.events = events;
+        console.log(events)
       })
     }
   }
 
-  openModal() {    
-    this.modal.open();
-  }
-
-  openModalEdit(event: any) {    
-    this.modal.open(event);
-  }
-
-  async delete (event: any) {
+  async delete (event: EventInterface) {
     if (event.volunteers !== undefined) {
       event.volunteers.forEach((user: UserInterface) => {
         this.eventDataService.removeByUser(user.uid, event)
@@ -52,5 +45,13 @@ export class OngEventsComponent {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  openModal() {    
+    this.modal.open();
+  }
+
+  openModalEdit(event: EventInterface) {    
+    this.modal.open(event);
   }
 }

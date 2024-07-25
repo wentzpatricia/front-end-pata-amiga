@@ -1,11 +1,13 @@
 import { Auth } from '@angular/fire/auth';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { EventDataService } from '../../_services/eventData.service';
 import { EventInterface } from '../../_models/event.interface';
 import { EventTypeEnum } from '../../../../core/_utils/EventType.enum';
-import { DatePipe } from '@angular/common';
 
 @Component({ selector: 'app-event-form', templateUrl: './event-form.component.html', styleUrl: './event-form.component.scss' })
 export class EventFormComponent {
@@ -18,7 +20,7 @@ export class EventFormComponent {
   hideConfirm: boolean = true;
   EventTypeEnum = EventTypeEnum;
   formTitle = 'Novo Evento'
-  event: EventInterface | any = null
+  event: EventInterface | null = null
   editForm : boolean = false
 
   constructor(
@@ -31,29 +33,6 @@ export class EventFormComponent {
 
   ngOnInit(): void {
     this.createForm();
-  }
-
-  open(event?: any) {
-    if (event !== undefined) {
-      this.formTitle = 'Editar Evento'
-      this.event = event
-      this.editForm = true
-    } else {
-      this.formTitle = 'Novo Evento'
-      this.event = null
-      this.editForm = false
-    }
-
-    this.createForm()
-
-    this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      },
-    );
   }
 
   private formatDate(date: Date, type?: any) {
@@ -74,13 +53,32 @@ export class EventFormComponent {
     }
   }
 
+  createForm() {
+    if (this.event !== null) {
+      this.form = this.formBuilder.group({
+        local: [this.event.local, Validators.required],
+        date_at: [this.formatDate(this.event.date_at), Validators.required],
+        hour_at: [this.formatDate(this.event.date_at, 'time'), Validators.required], 
+        type: [this.event.type, Validators.required]
+      });
+    } else {
+      this.form = this.formBuilder.group({
+        local: ['', Validators.required],
+        date_at: ['',Validators.required],
+        hour_at: ['',Validators.required], 
+        type: ['',Validators.required]
+      });
+    }
+  }
+
   doSave() : void {
     const formData = this.form.getRawValue()
 
     let uid = Math.random().toString() 
 
     if (this.editForm) {
-      uid = this.event.uid 
+      if(this.event !== null)
+        uid = this.event.uid 
     }
 
     let event : EventInterface = {
@@ -111,22 +109,27 @@ export class EventFormComponent {
     }
   }
 
-  createForm() {
-    if (this.event !== null) {
-      console.log(this.event)
-      this.form = this.formBuilder.group({
-        local: [this.event.local, Validators.required],
-        date_at: [this.formatDate(this.event.date_at), Validators.required],
-        hour_at: [this.formatDate(this.event.date_at, 'time'), Validators.required], 
-        type: [this.event.type, Validators.required]
-      });
+  open(event?: any) {
+    if (event !== undefined) {
+      this.formTitle = 'Editar Evento'
+      this.event = event
+      this.editForm = true
     } else {
-      this.form = this.formBuilder.group({
-        local: ['', Validators.required],
-        date_at: ['',Validators.required],
-        hour_at: ['',Validators.required], 
-        type: ['',Validators.required]
-      });
+      this.formTitle = 'Novo Evento'
+      this.event = null
+      this.editForm = false
     }
+
+    this.createForm()
+
+    this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      },
+    );
   }
+  
 }

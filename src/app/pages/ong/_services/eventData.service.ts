@@ -6,6 +6,7 @@ import { EventInterface } from '../_models/event.interface';
 import { addDoc, collection, deleteDoc, DocumentData, getDocs, query, QuerySnapshot, setDoc, where } from 'firebase/firestore';
 import { UserInterface } from '../../../auth/register/_models/user.interface';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,8 +56,8 @@ export class EventDataService {
     );
 
     return from(getDocs(searchPipe))
-      .pipe(
-        map(querySnapshot => {
+        .pipe(
+          map(querySnapshot => {
           const dataList: EventInterface[] = [];
           querySnapshot.forEach(doc => {
             if (doc.exists()) {
@@ -116,7 +117,7 @@ export class EventDataService {
       )
   }
 
-  async getByUser(uid: string | any) {
+  async getByUser(uid: string) {
     const userDocRef = doc(collection(this.firestore, 'users'), uid);
     const userDocData = await getDoc(userDocRef)
 

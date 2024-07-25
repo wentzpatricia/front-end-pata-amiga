@@ -35,7 +35,13 @@
                 </h3>
                 </div>
                 <div class="col-3 card-list__container">
-                    <a href="#!">Ver lista</a>
+                    <span>Voluntários</span>
+                    @for (volunteers of item.volunteers; track $index) {
+                        <h3>{{volunteers.email}}</h3>
+                    }@empty{
+                        <h3>Nenhum voluntário cadastrado</h3>
+                    }
+                    
                 </div>
                 <div class="col-1 card-list__container">
                     <span>Ações</span>
