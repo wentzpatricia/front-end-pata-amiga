@@ -35,7 +35,8 @@ export class MyVolunteeringComponent implements OnInit {
       if (this.firebaseAuth.currentUser?.uid) {
         try {
           this.eventDataService.removeByUser(this.firebaseAuth.currentUser?.uid, eventToCancel)
-          this.eventDataService.removeUserOnEvent(eventToCancel.uid, this.firebaseAuth.currentUser?.email)
+          if(this.firebaseAuth.currentUser?.email)
+            this.eventDataService.removeUserOnEvent(eventToCancel.uid, this.firebaseAuth.currentUser?.email)
 
           const element = document.getElementById(eventToCancel.uid)
           if (element) {
