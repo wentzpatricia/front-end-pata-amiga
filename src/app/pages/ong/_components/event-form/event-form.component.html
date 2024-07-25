@@ -1,16 +1,7 @@
 <ng-template #content let-modal>
-	<div class="modal-header">	
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
+	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>	
     <div class="container-form">
         <div class="form">
-        <h3 class="form__title">
-            <img
-            class="form__title_img"
-            src="{{ logo }}"
-            alt="Logo do sistema"
-            />Pata amiga
-        </h3>
         <p>Cadastro de Eventos</p>
         <form [formGroup]="form">
             <div class="form-group">
@@ -36,26 +27,23 @@
                 <label for="hora">Hora</label>
                 <input type="time" id="hora" class="form-control" formControlName="hour_f">
             </div>
-            <div class="form-check">
-                <label>Atividade</label>
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Banho
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Transporte Solidário
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Voluntário Evento
-                </label>            
-            </div>       
-            <button
+            <div class="form-group">
+                <label for="atividade">Atividade</label>
+                <select
+                formControlName="activity_f"
+                class="form-select"
+                placeholder="Selecionar"
+            >
+            <option [value]="'BATH'" selected>Banho</option>
+            <option [value]="'TRANSPORT'">Transporte Solidário</option>
+            <option [value]="'EVENT'">Cuidar dos animais no evento</option>
+            </select>
+            </div>
+            <button 
+            customButton color="primary" label="Enviar"
             class="btn-submit btn"
             [disabled]="!form.valid"
-            >
-            Enviar
+            >          
             </button>        
         </form>
         </div>

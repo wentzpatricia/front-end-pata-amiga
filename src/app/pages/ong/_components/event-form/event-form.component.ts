@@ -35,7 +35,7 @@ ngOnInit(): void {
 }
 
 open() {
-  console.log("euaihaeiuhaeui")
+  
   this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
     (result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -59,9 +59,10 @@ private getDismissReason(reason: any): string {
 createForm() {
   this.form = this.formBuilder.group(
     {
-        local: ['IGUATEMI'],
-        date_f: ['12/07/2024'],
-        hour_f: ['12:00'],        
+        local: ['', Validators.required],
+        date_f: ['',Validators.required],
+        hour_f: ['',Validators.required], 
+        activity_f: ['',Validators.required],      
       
     }    
   );

@@ -51,8 +51,7 @@ export class OngEventsComponent {
       this.data = events
     })
   }
-  openModal() {
-    console.log("kkkkkkkk")
+  openModal() {    
     this.modal.open();
   }
 
