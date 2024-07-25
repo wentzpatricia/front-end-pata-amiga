@@ -31,8 +31,9 @@ export class EventsComponent {
         try {
           if (this.firebaseAuth.currentUser?.email) {
             const user: UserInterface = {
+              uid: this.firebaseAuth.currentUser.uid,
               email: this.firebaseAuth.currentUser?.email,
-              userType: UserTypeEnum.ONG,
+              userType: UserTypeEnum.VOLUNTEER
             };
 
             this.eventDataService.addByUser(this.firebaseAuth.currentUser?.uid, event)
@@ -44,7 +45,7 @@ export class EventsComponent {
             }
           }
         } catch (err) {
-          // console.log(err)
+          //
         }
       }
     }
@@ -56,7 +57,6 @@ export class EventsComponent {
         },
         error: (err) => {
         //
-        console.log(err)
        }
     })
   }

@@ -60,7 +60,8 @@ export class EventDataService {
                         uid: doc.id,
                         date_at: data['date_at'].toDate(),
                         local: data['local'],
-                        type: data['type']
+                        type: data['type'],
+                        volunteers: data['volunteers']
                     };
                     dataList.push(event);
                 }
@@ -86,9 +87,9 @@ export class EventDataService {
                 if (doc.exists()) {
                     const data = doc.data() as DocumentData;
                     let userJaSeInscreveu = false
-                    if (data['users'] !== undefined) {
-                      for (let i = 0; i < data['users'].length; i++) {
-                        if (data['users'][i].email === emailUser) {
+                    if (data['volunteers'] !== undefined) {
+                      for (let i = 0; i < data['volunteers'].length; i++) {
+                        if (data['volunteers'][i].email === emailUser) {
                           userJaSeInscreveu = true
                         }
                       }
@@ -159,14 +160,14 @@ export class EventDataService {
   async addUserOnEvent(uid: string | any, user: UserInterface) {
     const eventDocRef = doc(collection(this.firestore, 'events'), uid);
     const eventDocData = await getDoc(eventDocRef)
-    let users = []
+    let volunteers = []
     if (eventDocData.exists()) {
         const eventData = eventDocData.data()
-        users = eventData['users'] || []
+        volunteers = eventData['volunteers'] || []
     }
-    users.push(user)
+    volunteers.push(user)
 
-    await setDoc(eventDocRef, { users }, { merge: true})
+    await setDoc(eventDocRef, { volunteers }, { merge: true})
   }
 
   async removeUserOnEvent(uid: string | any, email: string | any) {

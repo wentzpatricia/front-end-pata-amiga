@@ -1,0 +1,38 @@
+<ng-template #content let-modal>
+	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>	
+    <div class="container-form">
+        <div class="form">
+        <p>Cadastro de Eventos</p>
+        <form [formGroup]="form">
+            <div class="form-group">
+                <label>Local</label>
+                <select
+                    formControlName="local"
+                    class="form-select"
+                    placeholder="Selecionar">
+                    <option [value]="'Iguatemi'" selected>Shopping Iguatemi</option>
+                    <option [value]="'Ponta'">Shopping Pontal</option>
+                    <option [value]="'Total'">Shopping Total</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="date" id="data" class="form-control" formControlName="date_at">
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" class="form-control" formControlName="hour_at">
+            </div>
+            <div class="form-group">
+                <label for="atividade">Atividade</label>
+                <select formControlName="type" class="form-select" placeholder="Selecionar">
+                    <option [value]="'BATH'" selected>Banho</option>
+                    <option [value]="'TRANSPORT'">Transporte Solidário</option>
+                    <option [value]="'EVENT'">Cuidar dos animais no evento</option>
+                </select>
+            </div>
+                <button customButton color="primary" (click)="doSave()" label="Enviar" class="btn-submit btn" [disabled]="!form.valid"></button>
+            </form>
+        </div>
+    </div>
+</ng-template>

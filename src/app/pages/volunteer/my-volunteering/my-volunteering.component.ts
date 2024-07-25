@@ -17,7 +17,7 @@ export class MyVolunteeringComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.fetchPendingEvents()
+      this.fetchPendingEvents()
     }
 
     fetchPendingEvents() {
@@ -42,7 +42,7 @@ export class MyVolunteeringComponent implements OnInit {
             element.remove()
           }
         } catch (err) {
-          // console.log(err)
+          //
         }
       }
     }
