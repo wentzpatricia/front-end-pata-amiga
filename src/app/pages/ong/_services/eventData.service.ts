@@ -53,8 +53,6 @@ export class EventDataService {
       where('date_at', '>=', new Date())
     );
 
-    console.log(userUid)
-
     return from(getDocs(searchPipe))
       .pipe(
         map(querySnapshot => {

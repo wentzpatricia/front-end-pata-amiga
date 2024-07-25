@@ -23,6 +23,7 @@ export class EventFormComponent {
   closeResult = '';
   image = './../../../assets/images/background-login.png';
   logo = './../../../assets/icons/logo-brown.svg';
+  EventTypeEnum = EventTypeEnum;
 
   constructor(
     private firebaseAuth: Auth,
@@ -71,23 +72,16 @@ export class EventFormComponent {
   doSave() : void {
     const formData = this.form.getRawValue()
 
-    const eventType = EventTypeEnum.EVENT    
-    if (EventTypeEnum.BATH === formData.type) {
-      const eventType = EventTypeEnum.BATH 
-    } else if (EventTypeEnum.TRANSPORT === formData.type) {
-      const eventType = EventTypeEnum.TRANSPORT
-    }
-
+  
     let event : EventInterface = {
       uid: Math.random().toString(),
       date_at: new Date(formData.date_at + 'T' + formData.hour_at),
       local: formData.local,
-      type: eventType,
+      type: formData.type,
       user: this.firebaseAuth.currentUser?.uid
     }
 
     this.eventDataService.save(event).then(() => {
-      console.log('save')
       this.modalService.dismissAll()
     }).catch((err) => {
       console.log(err)

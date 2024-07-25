@@ -1,8 +1,8 @@
 <ng-template #content let-modal>
 	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>	
     <div class="container-form">
-        <div class="form">
-        <p>Cadastro de Eventos</p>
+        <div class="form">            
+            <h3>Cadastro de Eventos</h3>
         <form [formGroup]="form">
             <div class="form-group">
                 <label>Local</label>
@@ -26,9 +26,9 @@
             <div class="form-group">
                 <label for="atividade">Atividade</label>
                 <select formControlName="type" class="form-select" placeholder="Selecionar">
-                    <option [value]="'BATH'" selected>Banho</option>
-                    <option [value]="'TRANSPORT'">Transporte Solidário</option>
-                    <option [value]="'EVENT'">Cuidar dos animais no evento</option>
+                    <option [value]="EventTypeEnum.BATH" selected>Banho</option>
+                    <option [value]="EventTypeEnum.TRANSPORT">Transporte Solidário</option>
+                    <option [value]="EventTypeEnum.EVENT">Cuidar dos animais no evento</option>
                 </select>
             </div>
                 <button customButton color="primary" (click)="doSave()" label="Enviar" class="btn-submit btn" [disabled]="!form.valid"></button>
